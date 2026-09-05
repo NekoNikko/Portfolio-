@@ -1,10 +1,10 @@
 {
-  "$comment": "Public portfolio identity migrated from the GitHub portfolio (Marlon T. Argente). Review before deploying: phone number and location are the owner's own public data from the previous portfolio.",
+  "$comment": "Public portfolio identity. Sensitive data redacted: phone number removed, location generalized to country. Contact email is the owner's own professional address (also on the public GitHub/LinkedIn profiles).",
   "name": "Marlon T. Argente",
   "initials": "MA",
   "professionalTitle": "IT Specialist & Software Support Engineer",
   "tagline": "Enterprise IT infrastructure, networking, automation, and AI-assisted software engineering.",
-  "location": "Tayabas City, Quezon, Philippines",
+  "location": "Philippines",
   "hero": {
     "kicker": "Live Agentic Engineering Portfolio",
     "headline": "15+ years keeping enterprises running — now building the next generation with AI-assisted engineering.",
@@ -76,7 +76,6 @@
     "kicker": "Get in touch",
     "headline": "Let's talk about your project.",
     "email": "argente.marlon@gmail.com",
-    "phone": "+63 966-2247-402",
     "preferredMethod": "Email",
     "note": "Prefer email for project inquiries. I respond to technical questions about infrastructure, automation, and how work was planned, verified, and tested."
   },

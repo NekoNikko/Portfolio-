@@ -128,7 +128,7 @@ export default function AboutPage() {
                 <figcaption className="mt-4 pt-4 border-t border-line-soft">
                   <p className="font-semibold text-foreground text-sm">{t.name}</p>
                   <p className="text-xs text-faint">
-                    {t.role} · {t.company}
+                    {[t.role, t.company].filter(Boolean).join(" · ")}
                   </p>
                 </figcaption>
               </figure>

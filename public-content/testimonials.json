@@ -1,22 +1,19 @@
 {
-  "$comment": "Testimonials migrated from the owner's GitHub portfolio. Avatars were stock photos in the original; rendered here as initials instead. Confirm these are real endorsements before sharing the site.",
+  "$comment": "Testimonials migrated from the owner's GitHub portfolio. Third-party personal names are REDACTED (privacy): each endorsement is attributed by professional role and organization only. Restore real names only with each person's explicit consent.",
   "testimonials": [
     {
-      "name": "Dr. Roberto Santos",
-      "role": "Campus Director",
-      "company": "AMA Computer College",
+      "name": "Campus Director",
+      "role": "AMA Computer College",
       "content": "Marlon's commitment to our IT operations was legendary. For 16 years, our computer labs stayed consistently online, and our systems ran without major incident. He possesses a rare combination of hardware expertise, scripting, and extreme reliability."
     },
     {
-      "name": "Elena Marasigan",
-      "role": "Senior IT Education Specialist",
-      "company": "Schools Division Office of Tayabas",
+      "name": "Senior IT Education Specialist",
+      "role": "Schools Division Office of Tayabas",
       "content": "Marlon's performance while validating school computer labs was spectacular. His detailed technical reports pinpointed critical security lapses in various networks and outlined clear remediation pathways that significantly improved our digital readiness."
     },
     {
-      "name": "Michael Torres",
-      "role": "Infrastructure Consultant",
-      "company": "Velocti Systems",
+      "name": "Infrastructure Consultant",
+      "role": "Velocti Systems",
       "content": "Marlon is a true professional with deep Windows Server and virtualization expertise. The Active Directory reorganization project he completed for his institute is a case study of excellent role-based access design."
     }
   ]
