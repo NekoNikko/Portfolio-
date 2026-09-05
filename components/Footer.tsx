@@ -56,12 +56,20 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.name ?? "Marlon"}. Built with an
             AI-assisted, human-verified workflow.
           </p>
-          <Link
-            href="/contact"
-            className="font-mono text-xs text-accent hover:text-sky-300 transition-colors"
-          >
-            → Get in touch
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/admin"
+              className="font-mono text-xs text-faint hover:text-muted transition-colors"
+            >
+              /admin
+            </Link>
+            <Link
+              href="/contact"
+              className="font-mono text-xs text-accent hover:text-sky-300 transition-colors"
+            >
+              → Get in touch
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

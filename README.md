@@ -79,6 +79,43 @@ GET /api/public/skills
 GET /api/public/updates
 ```
 
+## Admin area (owner only)
+
+`/admin` is a password-protected publication console:
+
+- Set `ADMIN_PASSWORD` in `.env.local` (server-side only, minimum 8 chars).
+- Login issues an HttpOnly, HMAC-signed session cookie (12h TTL) with login
+  rate limiting and Origin checks on mutations.
+- **Publication Queue** — candidates land in `data/queue/` (gitignored), are
+  auto-sanitized on import, and only a human can approve them. Approval runs
+  a sensitive-content scan; candidates with violations are blocked.
+- **Content Manager** — publish / unpublish anything in `public-content/`.
+  Unpublished items disappear from the public site immediately.
+- **Audit Log** — append-only `data/audit.jsonl` of every CREATED / EDITED /
+  SANITIZED / APPROVED / PUBLISHED / UNPUBLISHED / REJECTED action.
+- **Export** — download all public data as JSON (spec: exportable public data).
+
+### Publication flow
+
+```
+WORK → Agentic OS → daily log → candidate (data/queue/) → SANITIZE
+  → human review → APPROVE → public-content/ (status: published)
+  → portfolio pages + public API
+```
+
+Anything without `status: published` AND `public: true` never renders
+anywhere — not on pages, not in the API, not in the sitemap.
+
+> Draft candidates in `data/queue/` may contain pre-sanitization content and
+> are gitignored for that reason. The audit log is gitignored too.
+
+## Sensitive-data scan
+
+The publication layer scans content for API keys, passwords, tokens, private
+keys, bearer tokens, emails, phone numbers, internal IPs, internal hostnames,
+and filesystem paths before anything can be approved. Matches are flagged in
+the queue review screen and can be auto-replaced with `[REDACTED]` on import.
+
 ## Environment
 
 See `.env.example`. `PUBLIC_BASE_URL` (canonical URLs / sitemap) and `PORT`

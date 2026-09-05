@@ -29,3 +29,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# admin runtime state (publication queue + audit log)
+# Draft candidates may contain pre-sanitization content — never commit them
+# to the public repository. public-content/ (approved) stays tracked.
+/data/
