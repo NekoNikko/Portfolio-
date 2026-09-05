@@ -3,6 +3,7 @@ id: proxmox-home-lab
 title: Proxmox VE Home Lab
 status: published
 projectStatus: COMPLETED
+currentPhase: Completed
 public: true
 summary: Highly redundant virtualization platform for sandboxing educational and IT tools, with encrypted Proxmox Backup Server storage.
 technologies:

@@ -2,7 +2,8 @@
 id: cybersecurity-lab
 title: Cybersecurity Security Lab
 status: published
-projectStatus: COMPLETED
+projectStatus: STANDBY
+currentPhase: Standby
 public: true
 summary: Intrusion detection and real-time log analysis cluster built on Wazuh SIEM with agent-based monitoring across target VMs.
 technologies:
@@ -17,7 +18,7 @@ category: cybersecurity
 
 # Cybersecurity Security Lab
 
-**Status:** COMPLETED
+**Status:** STANDBY
 
 ## Overview
 

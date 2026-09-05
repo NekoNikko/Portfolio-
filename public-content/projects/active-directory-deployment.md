@@ -2,7 +2,8 @@
 id: active-directory-deployment
 title: Active Directory Deployment
 status: published
-projectStatus: COMPLETED
+projectStatus: STANDBY
+currentPhase: Standby
 public: true
 summary: Unified identity, authentication, and access management system built on enterprise role-based access control (RBAC) with automated provisioning and audit trails.
 technologies:
@@ -16,7 +17,7 @@ category: infrastructure
 
 # Active Directory Deployment
 
-**Status:** COMPLETED
+**Status:** STANDBY
 
 ## Overview
 

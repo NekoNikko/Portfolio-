@@ -3,6 +3,7 @@ id: network-infrastructure-design
 title: Network Infrastructure Design
 status: published
 projectStatus: COMPLETED
+currentPhase: Completed
 public: true
 summary: Highly secure and optimized VLAN topology managed by pfSense firewalls, with QoS, multi-WAN load balancing, and failover.
 technologies:

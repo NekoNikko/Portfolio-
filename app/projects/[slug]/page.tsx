@@ -61,13 +61,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {project.projectStatus && <StatusBadge status={project.projectStatus} />}
       </div>
 
-      <dl className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+      <dl className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
         <div>
           <dt className="text-faint font-mono text-xs uppercase tracking-wider">
-            Last updated
+            Current phase
           </dt>
           <dd className="mt-1 text-foreground">
-            {project.lastUpdated ? formatDate(project.lastUpdated) : "Not available"}
+            {project.currentPhase ?? "—"}
           </dd>
         </div>
         <div>
@@ -80,10 +80,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
         <div>
           <dt className="text-faint font-mono text-xs uppercase tracking-wider">
+            Last updated
+          </dt>
+          <dd className="mt-1 text-foreground">
+            {project.lastUpdated ? formatDate(project.lastUpdated) : "Not available"}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-faint font-mono text-xs uppercase tracking-wider">
             Technology
           </dt>
           <dd className="mt-1 flex flex-wrap gap-1.5">
-            {(project.technologies ?? []).map((t) => (
+            {(project.technologies ?? []).slice(0, 4).map((t) => (
               <span
                 key={t}
                 className="px-2 py-0.5 rounded border border-line bg-background-soft font-mono text-xs text-accent"

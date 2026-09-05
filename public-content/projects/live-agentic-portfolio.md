@@ -3,6 +3,7 @@ id: live-agentic-portfolio
 title: Live Agentic Engineering Portfolio
 status: published
 projectStatus: IN DEVELOPMENT
+currentPhase: Deployment preparation
 public: true
 summary: The site you are reading — a controlled public window into private engineering work, with a publication filter, human approval, and a public-safe content layer.
 technologies:

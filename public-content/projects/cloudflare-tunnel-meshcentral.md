@@ -2,7 +2,8 @@
 id: cloudflare-tunnel-meshcentral
 title: Cloudflare Tunnel + MeshCentral
 status: published
-projectStatus: COMPLETED
+projectStatus: STANDBY
+currentPhase: Standby
 public: true
 summary: Secure remote workstation management without VPN overhead or port forwarding, using Cloudflare Tunnels and MeshCentral with MFA.
 technologies:
@@ -16,7 +17,7 @@ category: networking
 
 # Cloudflare Tunnel + MeshCentral
 
-**Status:** COMPLETED
+**Status:** STANDBY
 
 ## Overview
 

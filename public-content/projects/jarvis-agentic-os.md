@@ -2,7 +2,8 @@
 id: jarvis-agentic-os
 title: JARVIS Agentic OS
 status: published
-projectStatus: ACTIVE
+projectStatus: IN DEVELOPMENT
+currentPhase: Portfolio publication layer
 public: true
 summary: A local-first AI engineering command center that turns an Obsidian knowledge vault into a planning, building, testing and verification workspace.
 technologies:
@@ -20,7 +21,7 @@ sortDate: 2026-09-05
 
 # JARVIS Agentic OS
 
-**Status:** ACTIVE
+**Status:** IN DEVELOPMENT — current phase: portfolio publication layer
 
 ## Overview
 

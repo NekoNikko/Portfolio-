@@ -3,6 +3,7 @@ id: n8n-saas-portal
 title: Multi-Tenant n8n SaaS Portal
 status: published
 projectStatus: IN DEVELOPMENT
+currentPhase: Live-environment verification
 public: true
 summary: A SaaS that sells and provisions dedicated n8n automation instances per customer — payments, per-tenant provisioning, live status, and security hardening, built and verified in phases.
 technologies:

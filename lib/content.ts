@@ -27,6 +27,7 @@ export type ProjectStatus =
   | "IN DEVELOPMENT"
   | "TESTING"
   | "ACTIVE"
+  | "STANDBY"
   | "COMPLETED"
   | "MAINTENANCE"
   | "ARCHIVED";
@@ -35,7 +36,8 @@ export interface ProjectFrontmatter {
   id: string;
   title: string;
   status: string; // publication status: published | draft | …
-  projectStatus?: string; // lifecycle status: ACTIVE, IN DEVELOPMENT, …
+  projectStatus?: string; // lifecycle status: ACTIVE, IN DEVELOPMENT, STANDBY, …
+  currentPhase?: string; // what the project is doing right now
   public?: boolean;
   summary?: string;
   technologies?: string[];

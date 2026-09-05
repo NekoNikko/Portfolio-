@@ -3,6 +3,7 @@ id: school-lab-management
 title: School Laboratory Management
 status: published
 projectStatus: COMPLETED
+currentPhase: Completed
 public: true
 summary: Multi-seat terminal restoration and centralized software distribution platform — 40+ computers restored to pristine state in under 15 minutes.
 technologies:
