@@ -5,6 +5,7 @@ import {
   getSiteConfig,
   getExperience,
   getTestimonials,
+  getProjects,
 } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
@@ -22,12 +23,19 @@ export default function AboutPage() {
     tagline?: string;
     location?: string;
     bio?: string;
-    stats?: { value: string; label: string }[];
+    stats?: { value?: string; dynamic?: string; label: string }[];
     education?: { degree: string; institution: string; year: string };
     social?: { github?: string; linkedin?: string };
   };
   const experience = getExperience();
   const testimonials = getTestimonials();
+
+  // Stats marked "dynamic" are computed from published content — never
+  // fabricated. Projects Completed = count of published projects whose
+  // lifecycle status is COMPLETED.
+  const completedProjects = getProjects().filter(
+    (p) => p.projectStatus === "COMPLETED"
+  ).length;
 
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 py-16">
@@ -45,14 +53,20 @@ export default function AboutPage() {
       {/* Stats — from the owner's own portfolio */}
       {(site.stats?.length ?? 0) > 0 && (
         <dl className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {site.stats!.map((s) => (
-            <div key={s.label} className="p-4 rounded-lg border border-line bg-surface">
-              <dd className="text-2xl font-bold text-accent font-mono">{s.value}</dd>
-              <dt className="mt-1 text-[11px] text-faint font-mono uppercase tracking-wider">
-                {s.label}
-              </dt>
-            </div>
-          ))}
+          {site.stats!.map((s) => {
+            const value =
+              s.dynamic === "projects-completed"
+                ? String(completedProjects)
+                : (s.value ?? "Not yet available");
+            return (
+              <div key={s.label} className="p-4 rounded-lg border border-line bg-surface">
+                <dd className="text-2xl font-bold text-accent font-mono">{value}</dd>
+                <dt className="mt-1 text-[11px] text-faint font-mono uppercase tracking-wider">
+                  {s.label}
+                </dt>
+              </div>
+            );
+          })}
         </dl>
       )}
 

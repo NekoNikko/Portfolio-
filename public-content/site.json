@@ -17,7 +17,7 @@
   "bio": "Highly accomplished IT Specialist and Software Support Engineer with over 15 years of experience managing enterprise IT infrastructure, digital laboratories, and asset systems across government and academic institutions. Proven expertise in full-stack hardware diagnostics, Windows Server administration, network deployment, and rigorous asset auditing compliant with ISO quality standards. Adept at managing large-scale data integrity operations, resolving complex software architecture bottlenecks, and enforcing organizational cybersecurity practices. Currently exploring AI-assisted software development and agentic engineering workflows.",
   "stats": [
     { "value": "15+", "label": "Years Experience" },
-    { "value": "100+", "label": "Projects Supported" },
+    { "dynamic": "projects-completed", "label": "Projects Completed" },
     { "value": "35", "label": "Schools Audited" },
     { "value": "100%", "label": "Data Integrity Rating" }
   ],
