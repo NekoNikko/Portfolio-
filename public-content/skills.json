@@ -1,88 +1,85 @@
 {
-  "$comment": "Skills migrated from the owner's GitHub portfolio (Marlon T. Argente) plus the AI/agentic engineering skills evidenced by the Agentic OS and saas-portal projects. Levels derived from the owner's own self-assessment percentages.",
+  "$comment": "Skills list revised from the owner's master skill list (2026-09-05). Removed: MikroTik / Cisco, Backup Systems (Veeam / PBS), Python Scripting & Automation. Re-leveled: formerly Expert areas now rated Advanced; several cybersecurity, asset, and tooling areas rated Beginner.",
   "groups": [
     {
       "name": "Systems & Server Administration",
       "skills": [
-        { "name": "Windows Server 2022", "level": "Expert" },
-        { "name": "Active Directory / GPO", "level": "Expert" },
-        { "name": "DHCP & DNS Management", "level": "Expert" },
-        { "name": "User Access Control", "level": "Expert" },
-        { "name": "Permission Management", "level": "Expert" },
-        { "name": "Virtualization (Hyper-V / Proxmox)", "level": "Expert" }
+        { "name": "Windows Server 2022", "level": "Advanced" },
+        { "name": "Active Directory / GPO", "level": "Advanced" },
+        { "name": "DHCP & DNS Management", "level": "Advanced" },
+        { "name": "User Access Control", "level": "Advanced" },
+        { "name": "Permission Management", "level": "Advanced" },
+        { "name": "Virtualization (Hyper-V / Proxmox)", "level": "Advanced" }
       ]
     },
     {
       "name": "Network & Infrastructure Engineering",
       "skills": [
-        { "name": "LAN / WAN / WISP Deployment", "level": "Expert" },
+        { "name": "LAN / WAN / WISP Deployment", "level": "Advanced" },
         { "name": "Network Performance Monitoring", "level": "Advanced" },
         { "name": "CCTV Security Systems", "level": "Advanced" },
         { "name": "Biometric System Configuration", "level": "Advanced" },
-        { "name": "Hardware Configuration", "level": "Expert" },
-        { "name": "Cloudflare Tunnels", "level": "Expert" },
-        { "name": "pfSense / VLAN / QoS", "level": "Advanced" },
-        { "name": "MikroTik / Cisco", "level": "Advanced" }
+        { "name": "Hardware Configuration", "level": "Advanced" },
+        { "name": "Cloudflare Tunnels", "level": "Advanced" },
+        { "name": "pfSense / VLAN / QoS", "level": "Advanced" }
       ]
     },
     {
       "name": "Asset Lifecycle & Supply Chain",
       "skills": [
-        { "name": "Fixed-Asset Auditing", "level": "Expert" },
-        { "name": "Stock Inventory Control", "level": "Expert" },
-        { "name": "Procurement Logistics", "level": "Advanced" },
-        { "name": "Supply Chain Documentation", "level": "Expert" },
-        { "name": "ISO Compliance Auditing", "level": "Advanced" }
+        { "name": "Fixed-Asset Auditing", "level": "Advanced" },
+        { "name": "Stock Inventory Control", "level": "Advanced" },
+        { "name": "Procurement Logistics", "level": "Beginner" },
+        { "name": "Supply Chain Documentation", "level": "Beginner" },
+        { "name": "ISO Compliance Auditing", "level": "Beginner" }
       ]
     },
     {
       "name": "IT Support & Disaster Recovery",
       "skills": [
-        { "name": "Hardware & Software Lifecycle", "level": "Expert" },
-        { "name": "Advanced Fault Diagnostics", "level": "Expert" },
-        { "name": "System Imaging & Formatting", "level": "Expert" },
-        { "name": "Backup Systems (Veeam / PBS)", "level": "Expert" },
+        { "name": "Hardware & Software Lifecycle", "level": "Advanced" },
+        { "name": "Advanced Fault Diagnostics", "level": "Advanced" },
+        { "name": "System Imaging & Formatting", "level": "Advanced" },
         { "name": "Data Recovery Operations", "level": "Advanced" }
       ]
     },
     {
       "name": "Cybersecurity & Automation",
       "skills": [
-        { "name": "Network Security Monitoring", "level": "Expert" },
-        { "name": "Incident Response", "level": "Advanced" },
-        { "name": "Threat Detection (SIEM / Wazuh)", "level": "Advanced" },
-        { "name": "Python Scripting & Automation", "level": "Advanced" },
-        { "name": "PowerShell Automation", "level": "Advanced" },
-        { "name": "Webhook & Session Security", "level": "Building with" }
+        { "name": "Network Security Monitoring", "level": "Beginner" },
+        { "name": "Incident Response", "level": "Beginner" },
+        { "name": "Threat Detection (SIEM / Wazuh)", "level": "Beginner" },
+        { "name": "PowerShell Automation", "level": "Beginner" },
+        { "name": "Webhook & Session Security", "level": "Beginner" }
       ]
     },
     {
       "name": "Web Development",
       "skills": [
-        { "name": "Next.js (App Router)", "level": "Using in production projects" },
-        { "name": "React", "level": "Using in production projects" },
-        { "name": "TypeScript", "level": "Using in production projects" },
-        { "name": "Tailwind CSS", "level": "Using in production projects" },
-        { "name": "REST API design", "level": "Using in production projects" },
-        { "name": "PHP / MySQL", "level": "Advanced" }
+        { "name": "Next.js (App Router)", "level": "Building with AI" },
+        { "name": "React", "level": "Building with AI" },
+        { "name": "TypeScript", "level": "Building with AI" },
+        { "name": "Tailwind CSS", "level": "Building with AI" },
+        { "name": "REST API design", "level": "Building with AI" },
+        { "name": "PHP / MySQL", "level": "Building with AI" }
       ]
     },
     {
       "name": "Backend & Data",
       "skills": [
         { "name": "Node.js", "level": "Using in production projects" },
-        { "name": "PostgreSQL", "level": "Building with" },
-        { "name": "Supabase (Auth, RLS)", "level": "Building with" },
+        { "name": "PostgreSQL", "level": "Building with AI" },
+        { "name": "Supabase (Auth, RLS)", "level": "Building with AI" },
         { "name": "SQL", "level": "Using in production projects" }
       ]
     },
     {
       "name": "AI & Agentic Engineering",
       "skills": [
-        { "name": "AI-assisted software engineering", "level": "Building with" },
-        { "name": "Agentic engineering workflows", "level": "Building with" },
-        { "name": "AI verification discipline", "level": "Building with" },
-        { "name": "Prompt-based specialist agents", "level": "Building with" },
+        { "name": "AI-assisted software engineering", "level": "Building with AI" },
+        { "name": "Agentic engineering workflows", "level": "Building with AI" },
+        { "name": "AI verification discipline", "level": "Building with AI" },
+        { "name": "Prompt-based specialist agents", "level": "Building with AI" },
         { "name": "Obsidian / Markdown knowledge management", "level": "Using daily" }
       ]
     },
@@ -90,12 +87,12 @@
       "name": "Tooling & Platforms",
       "skills": [
         { "name": "Git / GitHub", "level": "Using daily" },
-        { "name": "Docker", "level": "Advanced" },
-        { "name": "Linux", "level": "Expert" },
-        { "name": "VMware", "level": "Advanced" },
-        { "name": "Proxmox VE / PBS", "level": "Expert" },
-        { "name": "Looker Studio dashboards", "level": "Advanced" },
-        { "name": "Stripe", "level": "Building with" }
+        { "name": "Docker", "level": "Beginner" },
+        { "name": "Linux", "level": "Beginner" },
+        { "name": "VMware", "level": "Beginner" },
+        { "name": "Proxmox VE", "level": "Advanced" },
+        { "name": "Looker Studio dashboards", "level": "Beginner" },
+        { "name": "Stripe", "level": "Building with AI" }
       ]
     }
   ],
@@ -112,8 +109,6 @@
     { "name": "Proxmox", "level": "Expert" },
     { "name": "MySQL", "level": "Advanced" },
     { "name": "Cloudflare", "level": "Expert" },
-    { "name": "Cisco", "level": "Advanced" },
-    { "name": "MikroTik", "level": "Advanced" },
     { "name": "Next.js", "level": "Web" },
     { "name": "TypeScript", "level": "Web" }
   ]

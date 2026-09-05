@@ -5,7 +5,9 @@ status: published
 projectStatus: IN DEVELOPMENT
 currentPhase: Portfolio publication layer
 public: true
-summary: A local-first AI engineering command center that turns an Obsidian knowledge vault into a planning, building, testing and verification workspace.
+summary: >-
+  A local-first AI engineering command center that turns an Obsidian knowledge
+  vault into a planning, building, testing and verification workspace.
 technologies:
   - Obsidian
   - Markdown
@@ -13,10 +15,10 @@ technologies:
   - TypeScript
   - Verification Systems
   - Automation
-date: 2026-08-01
-lastUpdated: 2026-09-05
+date: '2026-08-01'
+lastUpdated: '2026-09-05'
 category: ai-agentic
-sortDate: 2026-09-05
+sortDate: '2026-09-05'
 ---
 
 # JARVIS Agentic OS
