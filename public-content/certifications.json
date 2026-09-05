@@ -1,0 +1,347 @@
+{
+  "$comment": "Certifications migrated from the owner's GitHub portfolio with their original verification URLs. Nothing added or invented.",
+  "certifications": [
+    {
+      "title": "Google Cybersecurity Professional Certificate",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/professional-cert/Y54MATQQ5CXA"
+    },
+    {
+      "title": "Foundations of Cybersecurity",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 1, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/5ANLVZNCP93G"
+    },
+    {
+      "title": "Play It Safe: Manage Security Risks",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 1, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/T4QEUT3S2F2A"
+    },
+    {
+      "title": "Connect and Protect: Networks and Network Security",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 3, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/HJVVQEP5DRPG"
+    },
+    {
+      "title": "Tools of the Trade: Linux and SQL",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 5, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/HJJHY8WESM9S"
+    },
+    {
+      "title": "Assets, Threats, and Vulnerabilities",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 5, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/X84Y54MSSJNH"
+    },
+    {
+      "title": "Sound the Alarm: Detection and Response",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 5, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/FJUSC96PNDYG"
+    },
+    {
+      "title": "Automate Cybersecurity Tasks with Python",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 6, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/BPXW4SJ9V5T3"
+    },
+    {
+      "title": "Put It to Work: Prepare for Cybersecurity Jobs",
+      "issuer": "Google (via Coursera)",
+      "date": "Jan 6, 2024",
+      "category": "Google Cybersecurity",
+      "verificationUrl": "https://coursera.org/verify/VGBTY8FCYSLW"
+    },
+    {
+      "title": "Become a Cybersecurity Professional (Learning Path)",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 7, 2023",
+      "category": "LinkedIn Learning",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/6dfcb8fbc2d3a32aba968f358496fb95c416f997189b03990dff5e4a6e0b6e5c"
+    },
+    {
+      "title": "Cybersecurity Foundations (2020)",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 7, 2023",
+      "category": "LinkedIn Learning",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/59595f75a505c1da73f8d9ba15e520e6e1b406c93be9580fc6a3f06138042d59"
+    },
+    {
+      "title": "Land Your First Cybersecurity Job",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 7, 2023",
+      "category": "LinkedIn Learning",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/bb902064c1efd0f53058b45e68e09b9a5f0eb938ed682aa1183bec88053d0926"
+    },
+    {
+      "title": "Learning the OWASP Top 10",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 7, 2023",
+      "category": "LinkedIn Learning",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/350c4be7a764458cce0f1f0e4c02a32ba0a46e57adcd32d776db779d9479f170"
+    },
+    {
+      "title": "The Cybersecurity Threat Landscape",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 7, 2023",
+      "category": "LinkedIn Learning",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/e7d560c6d4c0cbab06f1f78f1b0391d55cf268e1b01c6ab101e99c7fc2b3f734"
+    },
+    {
+      "title": "Getting Started with Windows Server 2022 (Learning Path)",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 3, 2023",
+      "category": "Windows Server",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/74e25b7cce6dad97975e0c474a73fa579b6b6b3384457125787f1819ec96c637"
+    },
+    {
+      "title": "Windows Server 2022: DHCP and DNS",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 3, 2023",
+      "category": "Windows Server",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/8eb50cf249e7393a36d3a4265743724c60dee022825d1d69e91d7d6b230005cd"
+    },
+    {
+      "title": "Windows Server 2022 Essential Training",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 3, 2023",
+      "category": "Windows Server",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/226d33a75db01f7af3ae435b006949eb4a6cd71ff35d192aba819984314aae2c"
+    },
+    {
+      "title": "Windows Server 2022: Install and Configure Active Directory",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 3, 2023",
+      "category": "Windows Server",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/40d38e49454024cfe2b208f0049b258d26abc1ffae36d9219a0be04e31e06df5"
+    },
+    {
+      "title": "Windows Server 2022: Installation and Configuration",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 3, 2023",
+      "category": "Windows Server",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/bf96a8f948dfce57eb7e583953aac129d355bb7fc4a3b0cd65c7d6f59eddca1c"
+    },
+    {
+      "title": "AWS Certified Cloud Practitioner (CLF-C01) Cert Prep: Cloud Concepts",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Cloud (AWS)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/2afbf9bbedee5b42468795e1ff165f282231f7bc6804d84a40bd0c03e9f9e6ad"
+    },
+    {
+      "title": "AWS Certified Cloud Practitioner (CLF-C01) Cert Prep: Security",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Cloud (AWS)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/aeb7f79ff3af8ff865c3b3c7eb46e5fe3f4b85d2e0bcb5e063b6238cd34ab693"
+    },
+    {
+      "title": "AWS Certified Cloud Practitioner (CLF-C01) Cert Prep: Core Services",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Cloud (AWS)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/419ae11ab3d8c172ecb5ebe4c226c820231df91bb7a1061ed941ec5ed5ea02b5"
+    },
+    {
+      "title": "AWS Certified Cloud Practitioner (CLF-C01) Cert Prep: Billing and Pricing",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Cloud (AWS)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/086284aa1e982029f71834c41ed9131d4a2ad1b7823102912a0856ba17795e04"
+    },
+    {
+      "title": "Prepare for the AWS Certified Cloud Practitioner Exam (Learning Path)",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Cloud (AWS)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/050f4f6e82e1434a798085266efae2fae82f7c3639e06d2492bea4454b2a621b3"
+    },
+    {
+      "title": "Agile Software Development: Transforming Your Organization (2019)",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 22, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/26730cd943e227d298f934eb75358180a9d0cc7c3cb7d59d0b6f6cad1d139c79"
+    },
+    {
+      "title": "Agile Software Development",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 22, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/066a15e370e6f24aab29ff8564b602c14ebab1208cc3a911aac8872b3cde9a47"
+    },
+    {
+      "title": "Applying Lean, DevOps, and Agile to Your IT Organization",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 24, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/53ff110398703da3a5f73227586d21f4d50b3d092825d1d69e91d7d6b230005cd"
+    },
+    {
+      "title": "DevOps Foundations: Lean and Agile",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/55ea3af87b0c953af33bf149c962ba062f3d5c8387ec4c41eeae4c639da6fdc7"
+    },
+    {
+      "title": "DevOps Foundations: Transforming the Enterprise",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 23, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/feffd7c00f9618358f78aa7db490c349b7751f57295a51aa43f96e423f995204"
+    },
+    {
+      "title": "Lean Foundations",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/8909c070efe0c10c6d724ed27229b9cd41cb8f537e959a6ef06dd9f650e20b9f"
+    },
+    {
+      "title": "Lean Technology Strategy: Building High-Performing Teams",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 24, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/03b132fd01e9b6bc9a19dfd59dbfec74f35e0f926d617e79d110d5e2c26b4e65"
+    },
+    {
+      "title": "Lean Technology Strategy: Moving Fast With Defined Constraints",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 24, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/04cc53ec1c1bf1a17a2f5b1087b55f1f1f7eed70ddc8848e3f9cbdc3c4fa7ddb"
+    },
+    {
+      "title": "Lean Technology Strategy: Running Agile at Scale",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 23, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/41b3b5e08efa0844ade9cf6fdf078fabce07956ccebd27917c71924c0eb81970"
+    },
+    {
+      "title": "Lean Technology Strategy: Starting Your Business Transformation",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 24, 2023",
+      "category": "Agile & DevOps",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/3412d308cce7956338fab81c67dd85de02bcb93e3cc61d813cdc1e58d156b2d3"
+    },
+    {
+      "title": "CompTIA Security+ (SY0-601) Cert Prep: Threats, Attacks, and Vulnerabilities",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 6, 2023",
+      "category": "CompTIA Security+",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/da89626d3a84636cc4ba9a2b708af675a1363a8a784cc828326a035f20b0b8c6"
+    },
+    {
+      "title": "CompTIA Security+ (SY0-601) Cert Prep: Secure Code Design and Implementation",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 8, 2023",
+      "category": "CompTIA Security+",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/1c8074c5590eff34f3a5d2fa06b090ab55be1594d5b0a9ddbaee9345c40bcd6f"
+    },
+    {
+      "title": "CompTIA Security+ (SY0-601) Cert Prep: Cryptography Design and Implementation",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 13, 2023",
+      "category": "CompTIA Security+",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/abb92321d308fd0dcd553c2d382ee66cbd15a65fa85ace844978085a25135bba"
+    },
+    {
+      "title": "Exam Tips: CompTIA Security+ (SY0-601)",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 6, 2023",
+      "category": "CompTIA Security+",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/8a3304d308111cad6a419479dd92aa128260340d55858b01bf9a0a8369ffaf0f"
+    },
+    {
+      "title": "ITIL Foundation 4 First Look",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 4, 2023",
+      "category": "IT Service Management",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/8497b8eb3f77f8dd7b0386d744d37a6337ae3648f9a3323a3ac3cf5aa84556f8"
+    },
+    {
+      "title": "Putting ITIL Into Practice: Applying ITIL 4 Foundation Concepts",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 4, 2023",
+      "category": "IT Service Management",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/2b232ffc0627c98d74d2826e48f8fb1c2c03571642a3cd07ee512216cc35a9d6"
+    },
+    {
+      "title": "Microsoft 365 Essential Training for Administrators (2021)",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 25, 2023",
+      "category": "Microsoft 365",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/15ddc2f389c7ee93818e024c68a4457125787f1819ec96c637"
+    },
+    {
+      "title": "Microsoft Azure Fundamentals (AZ-900) Cert Prep: Cloud Concepts",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 26, 2023",
+      "category": "Cloud (Azure)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/3d48869212b17568f40fb3b1c594717ad851e57e8d243167b2a52eb84da416ef"
+    },
+    {
+      "title": "Microsoft Azure Fundamentals (AZ-900) Cert Prep: Architecture and Security",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 27, 2023",
+      "category": "Cloud (Azure)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/f7635a2dda146f8e6e7acf298b761636527a9ccfa21e12704eef1d7bebf00f64"
+    },
+    {
+      "title": "Azure Management: Portal, PowerShell, and CLI Basics",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 28, 2023",
+      "category": "Cloud (Azure)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/c571296e87d1ce5c18479e6cbef464bf6b7aef7123c49adb75104f3b7e2dcdbd"
+    },
+    {
+      "title": "Azure Network Security for Beginners: Tools and Services",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 28, 2023",
+      "category": "Cloud (Azure)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/6c75fca49df7e709d37959a109faa87fa5214c61e33b8321cd43d24e54803925"
+    },
+    {
+      "title": "Microsoft Entra ID: Basics",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 28, 2023",
+      "category": "Cloud (Azure)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/12cc03d8d8b4cd25983e825a7a1951791df61d34eede11f6e8ffdae20ad3d478"
+    },
+    {
+      "title": "Cloud Native Projects: AWS Serverless",
+      "issuer": "LinkedIn Learning",
+      "date": "Jan 21, 2023",
+      "category": "Cloud (AWS)",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/83b9ce3a166d8f6b144ff737b47c1e18f82e344ccba91442bed0a0d94c168d46"
+    },
+    {
+      "title": "IT Security Careers and Certifications: First Steps",
+      "issuer": "LinkedIn Learning",
+      "date": "Feb 7, 2023",
+      "category": "Cybersecurity",
+      "verificationUrl": "https://www.linkedin.com/learning/certificates/3add731acf758152b7cc29272f877f55e8b11fe3618de0e75a7707bde5ea2ab8"
+    },
+    {
+      "title": "Professional Career Service Eligibility",
+      "issuer": "Civil Service Commission, Philippines (Rating: 80.3)",
+      "date": "2012",
+      "category": "Government Eligibility"
+    }
+  ]
+}

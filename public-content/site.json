@@ -1,0 +1,91 @@
+{
+  "$comment": "Public portfolio identity migrated from the GitHub portfolio (Marlon T. Argente). Review before deploying: phone number and location are the owner's own public data from the previous portfolio.",
+  "name": "Marlon T. Argente",
+  "initials": "MA",
+  "professionalTitle": "IT Specialist & Software Support Engineer",
+  "tagline": "Enterprise IT infrastructure, networking, automation, and AI-assisted software engineering.",
+  "location": "Tayabas City, Quezon, Philippines",
+  "hero": {
+    "kicker": "Live Agentic Engineering Portfolio",
+    "headline": "15+ years keeping enterprises running — now building the next generation with AI-assisted engineering.",
+    "subheadline": "I design and maintain enterprise IT infrastructure, networks, and automation systems, and I document how I work. This portfolio is a living engineering workspace: real projects, real decisions, real verification — built with the help of a local AI engineering environment where every change is planned, tested, verified, and reviewed.",
+    "primaryCta": { "label": "View Projects", "href": "/projects" },
+    "secondaryCta": { "label": "Engineering Journal", "href": "/journal" },
+    "tertiaryCta": { "label": "About Me", "href": "/about" },
+    "quaternaryCta": { "label": "Contact", "href": "/contact" }
+  },
+  "bio": "Highly accomplished IT Specialist and Software Support Engineer with over 15 years of experience managing enterprise IT infrastructure, digital laboratories, and asset systems across government and academic institutions. Proven expertise in full-stack hardware diagnostics, Windows Server administration, network deployment, and rigorous asset auditing compliant with ISO quality standards. Adept at managing large-scale data integrity operations, resolving complex software architecture bottlenecks, and enforcing organizational cybersecurity practices. Currently exploring AI-assisted software development and agentic engineering workflows.",
+  "stats": [
+    { "value": "15+", "label": "Years Experience" },
+    { "value": "100+", "label": "Projects Supported" },
+    { "value": "35", "label": "Schools Audited" },
+    { "value": "100%", "label": "Data Integrity Rating" }
+  ],
+  "social": {
+    "github": "https://github.com/marlonargente",
+    "linkedin": "https://linkedin.com/in/marlonargente"
+  },
+  "education": {
+    "degree": "Bachelor of Science in Information Technology",
+    "institution": "AMA Computer College, Lucena City, Philippines",
+    "year": "2010"
+  },
+  "currentlyBuilding": {
+    "project": "JARVIS Agentic OS",
+    "status": "Active Development",
+    "phase": "Portfolio publication layer",
+    "lastPublicUpdate": "2026-09-05",
+    "technologies": ["Obsidian", "Markdown", "Agentic Workflows", "Verification Systems"],
+    "description": "Building a local-first AI engineering command center with project scanning, planning, task management, verification and knowledge management. The portfolio you are reading is the controlled public window into that workspace."
+  },
+  "currentlyLearning": [
+    { "topic": "Agentic AI", "level": "Building with" },
+    { "topic": "AI-assisted software engineering", "level": "Building with" },
+    { "topic": "Local-first architecture", "level": "Exploring" },
+    { "topic": "Cloud infrastructure (Supabase, Coolify, Cloudflare)", "level": "Building with" },
+    { "topic": "SIEM threat detection", "level": "Building with" },
+    { "topic": "Infrastructure automation", "level": "Building with" }
+  ],
+  "methodology": [
+    { "step": "Understand", "detail": "Define the problem and constraints before touching anything." },
+    { "step": "Research", "detail": "Scan evidence, read existing code and infrastructure, check current documentation." },
+    { "step": "Plan", "detail": "Break work into atomic tasks with dependencies; plans are reviewed before implementation." },
+    { "step": "Build", "detail": "Implement task by task, matching the project's existing conventions." },
+    { "step": "Test", "detail": "Automated tests plus manual verification of the actual behavior." },
+    { "step": "Verify", "detail": "Record evidence and confidence levels. Never claim completion without evidence." },
+    { "step": "Document", "detail": "Write decisions, findings and resume notes so work can continue." },
+    { "step": "Improve", "detail": "Review what worked and what didn't; fold lessons into the next iteration." }
+  ],
+  "aiUsage": {
+    "kicker": "How I use AI",
+    "headline": "AI as an engineering assistant — not an uncontrolled replacement for verification.",
+    "usedFor": [
+      "Research and documentation lookups",
+      "Planning and breaking work into atomic tasks",
+      "Code analysis and architecture review",
+      "Security review of code and configuration",
+      "Testing assistance and test-first development",
+      "Troubleshooting and diagnosing failures",
+      "Brainstorming and design exploration",
+      "Verification support"
+    ],
+    "principle": "AI-generated output is reviewed, tested, and verified before being accepted. Nothing is published automatically.",
+    "confidenceLevels": ["VERIFIED", "LIKELY", "POSSIBLE", "UNKNOWN"]
+  },
+  "contact": {
+    "kicker": "Get in touch",
+    "headline": "Let's talk about your project.",
+    "email": "argente.marlon@gmail.com",
+    "phone": "+63 966-2247-402",
+    "preferredMethod": "Email",
+    "note": "Prefer email for project inquiries. I respond to technical questions about infrastructure, automation, and how work was planned, verified, and tested."
+  },
+  "metrics": {
+    "note": "Metrics are computed from published content — never fabricated. Career statistics come from the owner's own portfolio."
+  },
+  "seo": {
+    "siteName": "Marlon T. Argente — IT Specialist & Software Support Engineer",
+    "description": "A living engineering portfolio: enterprise IT infrastructure, networking, automation, and AI-assisted software development — with real projects, an engineering journal, and a documented, verified workflow.",
+    "keywords": ["IT Specialist", "Software Support Engineer", "Windows Server", "Active Directory", "Networking", "Automation", "AI-assisted Development", "Engineering Portfolio"]
+  }
+}

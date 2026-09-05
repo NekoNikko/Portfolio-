@@ -1,0 +1,49 @@
+{
+  "updates": [
+    {
+      "id": "update-2026-09-05-1",
+      "date": "2026-09-05",
+      "project": "JARVIS Agentic OS",
+      "category": "architecture",
+      "summary": "Designed the portfolio publication architecture",
+      "detail": "Defined public/private separation, sanitization, and a human-approval publication pipeline.",
+      "public": true
+    },
+    {
+      "id": "update-2026-09-05-2",
+      "date": "2026-09-05",
+      "project": "Live Agentic Engineering Portfolio",
+      "category": "analysis",
+      "summary": "Completed portfolio transformation audit",
+      "detail": "Audited the existing application before building — architecture, reusable pieces, security concerns, and recommended phases.",
+      "public": true
+    },
+    {
+      "id": "update-2026-09-04-1",
+      "date": "2026-09-04",
+      "project": "Multi-Tenant n8n SaaS Portal",
+      "category": "security",
+      "summary": "Login establishes the session server-side (SEC-017)",
+      "detail": "Session cookie is HttpOnly from the first request; tokens never reach the browser.",
+      "public": true
+    },
+    {
+      "id": "update-2026-09-04-2",
+      "date": "2026-09-04",
+      "project": "Multi-Tenant n8n SaaS Portal",
+      "category": "security",
+      "summary": "Tenant schema + Row Level Security documented (SEC-016)",
+      "detail": "RLS policies scope every query to the authenticated user at the database layer.",
+      "public": true
+    },
+    {
+      "id": "update-2026-09-04-3",
+      "date": "2026-09-04",
+      "project": "Multi-Tenant n8n SaaS Portal",
+      "category": "security",
+      "summary": "Logout clears all session cookie schemes (SEC-015)",
+      "detail": "Both legacy and current session cookies are expired on logout.",
+      "public": true
+    }
+  ]
+}

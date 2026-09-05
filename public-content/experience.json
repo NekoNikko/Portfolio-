@@ -1,0 +1,69 @@
+{
+  "$comment": "Work history migrated from the owner's GitHub portfolio. Facts are the owner's own; nothing added.",
+  "positions": [
+    {
+      "role": "ICT Support Staff (Contract of Service)",
+      "company": "Department of Education — Tayabas",
+      "period": "Feb 2026 – May 2026",
+      "description": "Spearheaded the technical validation and data audit of ICT infrastructure and internet connectivity baselines across 35 regional schools, driving compliance for educational resource allocation.",
+      "highlights": [
+        "Technical validation and data audit of ICT infrastructure across 35 regional schools.",
+        "Automated administrative workflows with ad hoc low-code web applications, digital monitoring forms, and Looker Studio dashboards.",
+        "Consolidated technical reports for the Information Technology Officer with 100% data integrity under government compliance standards."
+      ]
+    },
+    {
+      "role": "IT Specialist / Property Assistant / Digital Laboratory Technician II",
+      "company": "AMA Computer College Inc. (Lucena)",
+      "period": "Jul 2022 – Jan 2026",
+      "description": "Directed operational maintenance for campus-wide digital laboratories while executing double duties as Lead Technical Property Officer.",
+      "highlights": [
+        "Streamlined the logistics lifecycle: auditing vendor supplies, gate pass protocols, and real-time stock cards.",
+        "Formulated and executed annual fixed-asset physical inventory audits of high-value electronics and hardware.",
+        "Orchestrated technical environment staging and equipment provisioning for academic events and seminars."
+      ]
+    },
+    {
+      "role": "IT Specialist / Property Assistant / Digital Laboratory Technician I",
+      "company": "AMA Computer College Inc. (Lucena)",
+      "period": "Feb 2018 – Jul 2022",
+      "description": "Managed central laboratory server configurations and resolved high-tier technical infrastructure problems for over 100 concurrent campus workstation users.",
+      "highlights": [
+        "Eliminated critical network bottlenecks by tracking LAN performance and optimizing server access routines.",
+        "Established routine system-wide backups, disk sanitization, and system re-imaging schedules.",
+        "Ran deep anti-malware and virus remediation scans via native disk utilities."
+      ]
+    },
+    {
+      "role": "IT Specialist",
+      "company": "AMA Computer College Inc. (Lucena)",
+      "period": "Aug 2017 – Feb 2018",
+      "description": "Designed and deployed robust physical network wiring layouts and hardware infrastructure for college expansions.",
+      "highlights": [
+        "Designed network wiring layouts and hardware infrastructure for College and Senior High School departments.",
+        "Evaluated corporate technical requirements and recommended optimized commercial software suites."
+      ]
+    },
+    {
+      "role": "Software Support Engineer",
+      "company": "AMA Computer College Inc. (Lucena)",
+      "period": "Nov 2012 – Aug 2017",
+      "description": "Troubleshot and resolved complex enterprise software application issues, maximizing system uptime and operational productivity.",
+      "highlights": [
+        "Administered core database security profiles, user directories, and access privileges in the campus Enrollment System.",
+        "Oversaw deployment and user onboarding of in-house software architectures.",
+        "Governed strict license compliance; designed technical training seminars for faculty."
+      ]
+    },
+    {
+      "role": "IT cum Laboratory Technician",
+      "company": "AMA Computer College Inc. (Lucena)",
+      "period": "Jun 2010 – Mar 2012",
+      "description": "Preserved hardware lifespan across multiple student computer labs through preventive maintenance.",
+      "highlights": [
+        "Internal component dusting, preventive maintenance, and component upgrades.",
+        "Administered the Computer Time Request booking queue during high-density periods."
+      ]
+    }
+  ]
+}

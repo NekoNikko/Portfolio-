@@ -1,0 +1,120 @@
+{
+  "$comment": "Skills migrated from the owner's GitHub portfolio (Marlon T. Argente) plus the AI/agentic engineering skills evidenced by the Agentic OS and saas-portal projects. Levels derived from the owner's own self-assessment percentages.",
+  "groups": [
+    {
+      "name": "Systems & Server Administration",
+      "skills": [
+        { "name": "Windows Server 2022", "level": "Expert" },
+        { "name": "Active Directory / GPO", "level": "Expert" },
+        { "name": "DHCP & DNS Management", "level": "Expert" },
+        { "name": "User Access Control", "level": "Expert" },
+        { "name": "Permission Management", "level": "Expert" },
+        { "name": "Virtualization (Hyper-V / Proxmox)", "level": "Expert" }
+      ]
+    },
+    {
+      "name": "Network & Infrastructure Engineering",
+      "skills": [
+        { "name": "LAN / WAN / WISP Deployment", "level": "Expert" },
+        { "name": "Network Performance Monitoring", "level": "Advanced" },
+        { "name": "CCTV Security Systems", "level": "Advanced" },
+        { "name": "Biometric System Configuration", "level": "Advanced" },
+        { "name": "Hardware Configuration", "level": "Expert" },
+        { "name": "Cloudflare Tunnels", "level": "Expert" },
+        { "name": "pfSense / VLAN / QoS", "level": "Advanced" },
+        { "name": "MikroTik / Cisco", "level": "Advanced" }
+      ]
+    },
+    {
+      "name": "Asset Lifecycle & Supply Chain",
+      "skills": [
+        { "name": "Fixed-Asset Auditing", "level": "Expert" },
+        { "name": "Stock Inventory Control", "level": "Expert" },
+        { "name": "Procurement Logistics", "level": "Advanced" },
+        { "name": "Supply Chain Documentation", "level": "Expert" },
+        { "name": "ISO Compliance Auditing", "level": "Advanced" }
+      ]
+    },
+    {
+      "name": "IT Support & Disaster Recovery",
+      "skills": [
+        { "name": "Hardware & Software Lifecycle", "level": "Expert" },
+        { "name": "Advanced Fault Diagnostics", "level": "Expert" },
+        { "name": "System Imaging & Formatting", "level": "Expert" },
+        { "name": "Backup Systems (Veeam / PBS)", "level": "Expert" },
+        { "name": "Data Recovery Operations", "level": "Advanced" }
+      ]
+    },
+    {
+      "name": "Cybersecurity & Automation",
+      "skills": [
+        { "name": "Network Security Monitoring", "level": "Expert" },
+        { "name": "Incident Response", "level": "Advanced" },
+        { "name": "Threat Detection (SIEM / Wazuh)", "level": "Advanced" },
+        { "name": "Python Scripting & Automation", "level": "Advanced" },
+        { "name": "PowerShell Automation", "level": "Advanced" },
+        { "name": "Webhook & Session Security", "level": "Building with" }
+      ]
+    },
+    {
+      "name": "Web Development",
+      "skills": [
+        { "name": "Next.js (App Router)", "level": "Using in production projects" },
+        { "name": "React", "level": "Using in production projects" },
+        { "name": "TypeScript", "level": "Using in production projects" },
+        { "name": "Tailwind CSS", "level": "Using in production projects" },
+        { "name": "REST API design", "level": "Using in production projects" },
+        { "name": "PHP / MySQL", "level": "Advanced" }
+      ]
+    },
+    {
+      "name": "Backend & Data",
+      "skills": [
+        { "name": "Node.js", "level": "Using in production projects" },
+        { "name": "PostgreSQL", "level": "Building with" },
+        { "name": "Supabase (Auth, RLS)", "level": "Building with" },
+        { "name": "SQL", "level": "Using in production projects" }
+      ]
+    },
+    {
+      "name": "AI & Agentic Engineering",
+      "skills": [
+        { "name": "AI-assisted software engineering", "level": "Building with" },
+        { "name": "Agentic engineering workflows", "level": "Building with" },
+        { "name": "AI verification discipline", "level": "Building with" },
+        { "name": "Prompt-based specialist agents", "level": "Building with" },
+        { "name": "Obsidian / Markdown knowledge management", "level": "Using daily" }
+      ]
+    },
+    {
+      "name": "Tooling & Platforms",
+      "skills": [
+        { "name": "Git / GitHub", "level": "Using daily" },
+        { "name": "Docker", "level": "Advanced" },
+        { "name": "Linux", "level": "Expert" },
+        { "name": "VMware", "level": "Advanced" },
+        { "name": "Proxmox VE / PBS", "level": "Expert" },
+        { "name": "Looker Studio dashboards", "level": "Advanced" },
+        { "name": "Stripe", "level": "Building with" }
+      ]
+    }
+  ],
+  "techStack": [
+    { "name": "Windows Server", "level": "Enterprise" },
+    { "name": "Active Directory", "level": "Expert" },
+    { "name": "Azure", "level": "Cloud" },
+    { "name": "AWS", "level": "Cloud" },
+    { "name": "Python", "level": "Advanced" },
+    { "name": "PowerShell", "level": "Advanced" },
+    { "name": "Docker", "level": "Containers" },
+    { "name": "Linux", "level": "Expert" },
+    { "name": "VMware", "level": "Virtualization" },
+    { "name": "Proxmox", "level": "Expert" },
+    { "name": "MySQL", "level": "Advanced" },
+    { "name": "Cloudflare", "level": "Expert" },
+    { "name": "Cisco", "level": "Advanced" },
+    { "name": "MikroTik", "level": "Advanced" },
+    { "name": "Next.js", "level": "Web" },
+    { "name": "TypeScript", "level": "Web" }
+  ]
+}
