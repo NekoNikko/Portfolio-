@@ -1,6 +1,10 @@
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import StatusBadge from "@/components/StatusBadge";
+import { DepthCard, SimpleDepthCard } from "@/components/DepthCard";
+import { Hero3D } from "@/components/Hero3D";
+import { CurrentlyBuildingStack } from "@/components/CurrentlyBuildingStack";
+import { HowIWorkScroll } from "@/components/HowIWorkScroll";
 import {
   getProjects,
   getJournal,
@@ -54,87 +58,22 @@ export default function HomePage() {
   const hero = site.hero ?? {};
   const building = site.currentlyBuilding ?? {};
 
-  // Real metrics computed from published content — never fabricated.
-  const metrics = {
-    projects: projects.length,
-    caseStudies: caseStudies.length,
-    updates: updates.length,
-    journal: getJournal().length,
-  };
-
-  const metricItems = [
-    { label: "Published Projects", value: String(metrics.projects) },
-    { label: "Journal Entries", value: String(metrics.journal) },
-    { label: "Case Studies", value: String(metrics.caseStudies) },
-    { label: "Engineering Updates", value: String(metrics.updates) },
-  ];
-
   return (
     <>
       {/* ------------------------------------------------------------------ */}
-      {/* HERO                                                               */}
+      {/* HERO — 3D Scroll Experience                                        */}
       {/* ------------------------------------------------------------------ */}
-      <section className="relative">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-20 pb-16 md:pt-28 md:pb-24">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-5">
-            {hero.kicker ?? "Live Agentic Engineering Portfolio"}
-          </p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.08] max-w-3xl">
-            {hero.headline ?? "I build software, automate infrastructure, and document how I work."}
-          </h1>
-          <p className="mt-6 text-lg text-muted leading-relaxed max-w-2xl">
-            {hero.subheadline}
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={hero.primaryCta?.href ?? "/projects"}
-              className="px-6 py-3 rounded-lg bg-accent text-background font-semibold text-sm hover:bg-sky-400 transition-colors shadow-lg shadow-sky-500/20"
-            >
-              {hero.primaryCta?.label ?? "View Projects"}
-            </Link>
-            <Link
-              href={hero.secondaryCta?.href ?? "/journal"}
-              className="px-6 py-3 rounded-lg bg-surface border border-line text-foreground font-semibold text-sm hover:border-accent/60 hover:text-accent transition-colors"
-            >
-              {hero.secondaryCta?.label ?? "Engineering Journal"}
-            </Link>
-            <Link
-              href={hero.tertiaryCta?.href ?? "/about"}
-              className="px-6 py-3 rounded-lg text-muted font-medium text-sm hover:text-foreground transition-colors"
-            >
-              {hero.tertiaryCta?.label ?? "About Me"} →
-            </Link>
-            <Link
-              href={hero.quaternaryCta?.href ?? "/contact"}
-              className="px-6 py-3 rounded-lg text-muted font-medium text-sm hover:text-foreground transition-colors"
-            >
-              {hero.quaternaryCta?.label ?? "Contact"} →
-            </Link>
-          </div>
-
-          <p className="mt-10 font-mono text-xs text-faint">
-            {site.name} · {site.professionalTitle}
-          </p>
-
-          {/* Real metrics — computed from published content, never fabricated */}
-          <dl className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
-            {metricItems.map((m) => (
-              <div
-                key={m.label}
-                className="p-4 rounded-lg border border-line bg-surface/60"
-              >
-                <dt className="order-2 mt-1 text-[11px] text-faint font-mono uppercase tracking-wider">
-                  {m.label}
-                </dt>
-                <dd className="order-1 text-2xl font-bold text-accent font-mono">
-                  {m.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
+      <Hero3D
+        kicker={hero.kicker}
+        headline={hero.headline}
+        subheadline={hero.subheadline}
+        primaryCta={hero.primaryCta}
+        secondaryCta={hero.secondaryCta}
+        tertiaryCta={hero.tertiaryCta}
+        quaternaryCta={hero.quaternaryCta}
+        name={site.name}
+        professionalTitle={site.professionalTitle}
+      />
 
       {/* ------------------------------------------------------------------ */}
       {/* CURRENTLY BUILDING                                                  */}
@@ -195,11 +134,25 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-        </section>
+</section>
       )}
-
+ 
       {/* ------------------------------------------------------------------ */}
-      {/* FEATURED PROJECTS                                                   */}
+      {/* CURRENTLY BUILDING — 3D Stack Visualization                        */}
+      {/* ------------------------------------------------------------------ */}
+      {building.project && (
+        <CurrentlyBuildingStack
+          project={building.project}
+          status={building.status}
+          phase={building.phase}
+          lastPublicUpdate={building.lastPublicUpdate}
+          technologies={building.technologies}
+          description={building.description}
+        />
+      )}
+ 
+      {/* ------------------------------------------------------------------ */}
+      {/* FEATURED PROJECTS — Depth Cards                                    */}
       {/* ------------------------------------------------------------------ */}
       {projects.length > 0 && (
         <section>
@@ -210,78 +163,50 @@ export default function HomePage() {
               description="Real projects with documented problems, decisions, verification, and lessons learned."
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {projects.slice(0, 3).map((p) => (
-                <Link
-                  key={p.slug}
-                  href={`/projects/${p.slug}`}
-                  className="group p-6 rounded-xl border border-line bg-surface hover:border-accent/50 transition-colors flex flex-col"
-                >
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <StatusBadge status={p.status} />
-                    <span className="font-mono text-xs text-faint">
-                      {p.lastUpdated ? formatDate(p.lastUpdated) : ""}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted leading-relaxed flex-1">
-                    {p.summary}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {(p.technologies ?? []).slice(0, 4).map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 rounded border border-line bg-background-soft font-mono text-[11px] text-muted"
-                      >
-                        {t}
+              {projects.slice(0, 3).map((p, index) => (
+                <SimpleDepthCard key={p.slug} entryDelay={index * 100}>
+                  <Link
+                    href={`/projects/${p.slug}`}
+                    className="group p-6 rounded-xl border border-line bg-surface hover:border-accent/50 transition-colors flex flex-col"
+                  >
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <StatusBadge status={p.status} />
+                      <span className="font-mono text-xs text-faint">
+                        {p.lastUpdated ? formatDate(p.lastUpdated) : ""}
                       </span>
-                    ))}
-                  </div>
-                  <p className="mt-4 font-mono text-xs text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-                    Read the case study →
-                  </p>
-                </Link>
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted leading-relaxed flex-1">
+                      {p.summary}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {(p.technologies ?? []).slice(0, 4).map((t) => (
+                        <span
+                          key={t}
+                          className="px-2 py-0.5 rounded border border-line bg-background-soft font-mono text-[11px] text-muted"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mt-4 font-mono text-xs text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                      Read the case study →
+                    </p>
+                  </Link>
+                </SimpleDepthCard>
               ))}
             </div>
           </div>
         </section>
       )}
-
+ 
       {/* ------------------------------------------------------------------ */}
-      {/* HOW I WORK                                                          */}
+      {/* HOW I WORK — Scroll Progression                                    */}
       {/* ------------------------------------------------------------------ */}
       {(site.methodology?.length ?? 0) > 0 && (
-        <section className="border-y border-line bg-background-soft/50">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
-            <SectionHeading
-              kicker="Methodology"
-              title="How I Work"
-              description="A fixed engineering loop: nothing is claimed complete without evidence."
-            />
-            <ol className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line rounded-xl overflow-hidden border border-line">
-              {site.methodology!.map((m, i) => (
-                <li key={m.step} className="bg-background-soft p-5">
-                  <span className="font-mono text-xs text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-2 font-bold text-foreground">{m.step}</h3>
-                  <p className="mt-1.5 text-xs text-muted leading-relaxed">
-                    {m.detail}
-                  </p>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-6 text-sm text-muted max-w-3xl">
-              AI is used as an engineering assistant across this loop — but
-              every AI-generated result is reviewed, tested, and verified
-              before it is accepted.{" "}
-              <Link href="/how-i-work" className="text-accent hover:text-sky-300">
-                Learn more →
-              </Link>
-            </p>
-          </div>
-        </section>
+        <HowIWorkScroll methodology={site.methodology} />
       )}
 
       {/* ------------------------------------------------------------------ */}
@@ -480,3 +405,5 @@ export default function HomePage() {
     </>
   );
 }
+
+
