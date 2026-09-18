@@ -1,102 +1,110 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/journal", label: "Engineering Journal" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/skills", label: "Skills" },
-  { href: "/how-i-work", label: "How I Work" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#work", label: "Work" },
+  { href: "/#method", label: "Method" },
+  { href: "/#ai-use", label: "AI use" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#journal", label: "Journal" },
+  { href: "/#contact", label: "Contact" },
 ];
 
-function isActive(pathname: string, href: string): boolean {
-  if (href === "/") return pathname === "/";
-  return pathname.startsWith(href);
-}
-
 export default function Nav() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-background/85 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 h-16 border-b border-line bg-background/95 backdrop-blur-sm">
       <nav
         aria-label="Main navigation"
-        className="mx-auto max-w-6xl px-4 sm:px-6 flex items-center justify-between h-16"
+        className="mx-auto grid h-full max-w-[1520px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10"
       >
         <Link
           href="/"
-          className="flex items-center gap-2.5 font-mono text-sm tracking-wide text-foreground"
+          aria-label="MA·Argente"
+          className="justify-self-start font-mono text-sm font-medium tracking-[0.02em] text-foreground transition-colors hover:text-accent"
         >
-          <span
-            aria-hidden="true"
-            className="flex items-center justify-center h-8 w-8 rounded-md bg-surface-raised border border-line text-accent text-xs font-bold glow-accent"
-          >
-            MA
-          </span>
-          <span className="hidden sm:inline">
-            Marlon<span className="text-accent">_</span>
-          </span>
+          MA<span className="text-accent">·</span>Argente
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden lg:flex items-center gap-1">
-          {LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                aria-current={isActive(pathname, link.href) ? "page" : undefined}
-                className={`px-3 py-2 rounded-md text-sm transition-colors ${
-                  isActive(pathname, link.href)
-                    ? "text-accent bg-surface-raised/60"
-                    : "text-muted hover:text-foreground hover:bg-surface"
-                }`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden justify-self-center lg:block">
+          <ul className="flex items-center gap-8">
+            {LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label={open ? "Close navigation" : "Open navigation"}
-          className="lg:hidden flex flex-col justify-center gap-[5px] h-9 w-9 items-center rounded-md border border-line bg-surface"
-        >
-          <span
-            className={`block h-px w-4 bg-foreground transition-transform ${open ? "translate-y-[6px] rotate-45" : ""}`}
-          />
-          <span className={`block h-px w-4 bg-foreground ${open ? "opacity-0" : ""}`} />
-          <span
-            className={`block h-px w-4 bg-foreground transition-transform ${open ? "-translate-y-[6px] -rotate-45" : ""}`}
-          />
-        </button>
+        <div className="col-start-3 justify-self-end">
+          <div
+            className="hidden items-center gap-2 rounded-[4px] border border-line px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-muted lg:flex"
+            aria-label="Open to work"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-40" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
+            </span>
+            Open to work
+          </div>
+
+          <div className="flex items-center gap-3 lg:hidden">
+            <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.08em] text-muted sm:flex">
+              <span className="h-2 w-2 rounded-full bg-success" />
+              Open to work
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              aria-label={open ? "Close navigation" : "Open navigation"}
+              className="grid h-9 w-9 place-items-center rounded-[4px] border border-line bg-surface"
+            >
+              <span className="sr-only">
+                {open ? "Close navigation" : "Open navigation"}
+              </span>
+
+              <span className="flex flex-col gap-[5px]">
+                <span
+                  className={`block h-px w-4 bg-foreground transition-transform ${
+                    open ? "translate-y-[6px] rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-px w-4 bg-foreground ${
+                    open ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-px w-4 bg-foreground transition-transform ${
+                    open ? "-translate-y-[6px] -rotate-45" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
       </nav>
 
-      {/* Mobile menu */}
       {open && (
-        <div id="mobile-nav" className="lg:hidden border-t border-line bg-background-soft">
-          <ul className="mx-auto max-w-6xl px-4 py-3 flex flex-col">
+        <div id="mobile-nav" className="border-t border-line bg-background lg:hidden">
+          <ul className="mx-auto max-w-[1520px] px-5 py-3 sm:px-8">
             {LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className={`block px-3 py-2.5 rounded-md text-sm ${
-                    isActive(pathname, link.href)
-                      ? "text-accent bg-surface-raised/60"
-                      : "text-muted hover:text-foreground"
-                  }`}
+                  className="block border-b border-line-soft py-3 font-mono text-xs uppercase tracking-[0.08em] text-muted transition-colors hover:text-accent last:border-b-0"
                 >
                   {link.label}
                 </Link>
