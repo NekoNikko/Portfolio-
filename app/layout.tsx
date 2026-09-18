@@ -1,19 +1,37 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Space_Grotesk,
+  IBM_Plex_Sans,
+  IBM_Plex_Mono,
+} from "next/font/google";
+
 import "./globals.css";
+
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ScrollRail from "@/components/ScrollRail";
 import { getSiteConfig } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const headingFont = Space_Grotesk({
+  variable: "--font-heading-family",
   subsets: ["latin"],
+  weight: ["600"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bodyFont = IBM_Plex_Sans({
+  variable: "--font-body-family",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const monoFont = IBM_Plex_Mono({
+  variable: "--font-mono-family",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export function generateMetadata(): Metadata {
@@ -27,10 +45,13 @@ export function generateMetadata(): Metadata {
     };
   };
 
-  const siteName = site.seo?.siteName ?? "Live Agentic Engineering Portfolio";
+  const siteName =
+    site.seo?.siteName ??
+    "Marlon T. Argente — IT Specialist & Software Support Engineer";
+
   const description =
     site.seo?.description ??
-    "A living engineering portfolio: real projects, engineering journal, case studies and the AI-assisted workflow behind them.";
+    "Systems, infrastructure, security, automation and AI-assisted engineering portfolio.";
 
   return {
     metadataBase: new URL(absoluteUrl("/")),
@@ -60,17 +81,24 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {/* Subtle technical grid behind everything */}
-        <div aria-hidden="true" className="grid-backdrop fixed inset-0 z-0" />
         <Nav />
-        <main className="relative z-10 flex-1 w-full">{children}</main>
+        <ScrollRail />
+
+        <main className="relative z-10 flex-1 w-full pt-16">
+          {children}
+        </main>
+
         <Footer />
       </body>
     </html>

@@ -4,8 +4,8 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import { join, isAbsolute } from "node:path";
 import { createHash } from "node:crypto";
-import { QueueItem, ApprovalStatus } from "./content-automation-types.ts";
-import type { ContentType } from "./content-automation-types.ts";
+import { QueueItem, ApprovalStatus } from "./content-automation-types";
+import type { ContentType } from "./content-automation-types";
 
 // Queue directory configurable via environment for test isolation
 const CONTENT_DIR = join(process.cwd(), "public-content");

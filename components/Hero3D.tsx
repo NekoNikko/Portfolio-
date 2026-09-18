@@ -1,8 +1,98 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Link from "next/link";
-import { useScrollDepth } from "@/lib/scroll";
-import { ParallaxLayer } from "@/components/ParallaxLayer";
+import Script from "next/script";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useSyncExternalStore,
+} from "react";
+
+const THREE_CDN =
+  "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+
+const NODE_COUNT = 45;
+const MOBILE_QUERY = "(max-width: 767px)";
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+declare global {
+  interface Window {
+    THREE?: any;
+  }
+}
+
+function subscribeToMobileQuery(callback: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const mediaQuery = window.matchMedia(MOBILE_QUERY);
+  mediaQuery.addEventListener("change", callback);
+
+  return () => {
+    mediaQuery.removeEventListener("change", callback);
+  };
+}
+
+function getMobileSnapshot() {
+  return typeof window !== "undefined"
+    ? window.matchMedia(MOBILE_QUERY).matches
+    : false;
+}
+
+function getServerMobileSnapshot() {
+  return false;
+}
+
+function subscribeToReducedMotion(callback: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
+  mediaQuery.addEventListener("change", callback);
+
+  return () => {
+    mediaQuery.removeEventListener("change", callback);
+  };
+}
+
+function getReducedMotionSnapshot() {
+  return typeof window !== "undefined"
+    ? window.matchMedia(REDUCED_MOTION_QUERY).matches
+    : false;
+}
+
+function getServerReducedMotionSnapshot() {
+  return false;
+}
+
+type CurrentlyBuildingInfo = {
+  project?: string;
+  status?: string;
+  phase?: string;
+  lastPublicUpdate?: string;
+  technologies?: string[];
+  description?: string;
+};
+
+const DEFAULT_CURRENT_BUILDING: Required<CurrentlyBuildingInfo> = {
+  project: "JARVIS Agentic OS",
+  status: "Active development",
+  phase: "Portfolio publication layer",
+  lastPublicUpdate: "2026-09-05",
+  technologies: [
+    "Obsidian",
+    "Markdown",
+    "Agentic Workflows",
+    "Verification Systems",
+  ],
+  description:
+    "Building a local-first AI engineering command center for project scanning, planning, governed tasks, verification, and knowledge management.",
+};
 
 export interface Hero3DProps {
   kicker?: string;
@@ -10,234 +100,551 @@ export interface Hero3DProps {
   subheadline?: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
-  tertiaryCta?: { label: string; href: string };
-  quaternaryCta?: { label: string; href: string };
   name?: string;
   professionalTitle?: string;
+  currentlyBuilding?: CurrentlyBuildingInfo;
+}
+
+function formatPublicDate(value: string) {
+  const [year, month, day] = value.split("-");
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const monthIndex = Number(month) - 1;
+
+  if (
+    !year ||
+    !day ||
+    monthIndex < 0 ||
+    monthIndex >= months.length
+  ) {
+    return value;
+  }
+
+  return `${months[monthIndex]} ${Number(day)}, ${year}`;
 }
 
 export function Hero3D({
   kicker = "Live Agentic Engineering Portfolio",
-  headline = "IT INFRASTRUCTURE.\nAUTOMATION.\nAI-ASSISTED\nENGINEERING.",
-  subheadline = "I design, operate, and improve practical IT systems — from infrastructure and networking to automation and governed AI workflows.",
-  primaryCta = { label: "View Selected Work", href: "/work" },
-  secondaryCta = { label: "Contact Me", href: "/contact" },
-  tertiaryCta,
-  quaternaryCta,
+  headline = "IT infrastructure.\nAutomation.\nAI-assisted engineering.",
+  subheadline =
+    "I design, operate, and improve practical IT systems — from infrastructure and networking to automation and governed AI workflows. Every result is reviewed, tested, and verified before it's called done.",
+  primaryCta = {
+    label: "View selected work",
+    href: "/#work",
+  },
+  secondaryCta = {
+    label: "Contact me",
+    href: "/#contact",
+  },
   name = "Marlon T. Argente",
   professionalTitle = "IT Specialist & Software Support Engineer",
+  currentlyBuilding,
 }: Hero3DProps) {
-  const { progress, isReducedMotion } = useScrollDepth();
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const topologyRef = useRef<HTMLDivElement>(null);
+  const cleanupTopologyRef = useRef<() => void>(() => {});
 
-  // Split headline into lines for layered effect
-  const headlineLines = headline.split("\n").filter(Boolean);
+  const isMobile = useSyncExternalStore(
+    subscribeToMobileQuery,
+    getMobileSnapshot,
+    getServerMobileSnapshot
+  );
+
+  const reducedMotion = useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionSnapshot,
+    getServerReducedMotionSnapshot
+  );
+
+  const building =
+    currentlyBuilding && currentlyBuilding.project
+      ? {
+          ...DEFAULT_CURRENT_BUILDING,
+          ...currentlyBuilding,
+          technologies:
+            currentlyBuilding.technologies ??
+            DEFAULT_CURRENT_BUILDING.technologies,
+        }
+      : DEFAULT_CURRENT_BUILDING;
+
+  const headlineLines = headline
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const initTopology = useCallback(() => {
+    cleanupTopologyRef.current();
+
+    const container = topologyRef.current;
+    const THREE = window.THREE;
+
+    if (!container || !THREE) {
+      return;
+    }
+
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      42,
+      1,
+      0.1,
+      100
+    );
+
+    camera.position.z = isMobile ? 9.2 : 7.4;
+
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      powerPreference: "low-power",
+    });
+
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(
+      Math.min(window.devicePixelRatio || 1, 1.5)
+    );
+
+    renderer.domElement.style.width = "100%";
+    renderer.domElement.style.height = "100%";
+    renderer.domElement.style.display = "block";
+
+    container.appendChild(renderer.domElement);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const nodes: any[] = [];
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+    for (let index = 0; index < NODE_COUNT; index += 1) {
+      const normalized = index / (NODE_COUNT - 1);
+
+      const y = 1 - normalized * 2;
+      const horizontalRadius = Math.sqrt(
+        Math.max(0, 1 - y * y)
+      );
+
+      const angle = goldenAngle * index;
+      const shellRadius =
+        3 + Math.sin(index * 1.73) * 0.16;
+
+      nodes.push(
+        new THREE.Vector3(
+          Math.cos(angle) *
+            horizontalRadius *
+            shellRadius,
+          y * shellRadius,
+          Math.sin(angle) *
+            horizontalRadius *
+            shellRadius
+        )
+      );
+    }
+
+    const nodeGeometry =
+      new THREE.BufferGeometry().setFromPoints(nodes);
+
+    const nodeMaterial = new THREE.PointsMaterial({
+      color: 0xe8a33d,
+      size: isMobile ? 0.075 : 0.065,
+      transparent: true,
+      opacity: 0.82,
+      depthWrite: false,
+      sizeAttenuation: true,
+    });
+
+    const pointCloud = new THREE.Points(
+      nodeGeometry,
+      nodeMaterial
+    );
+
+    group.add(pointCloud);
+
+    const lineVertices: number[] = [];
+    const connectionDistance = 1.7;
+
+    for (let a = 0; a < nodes.length; a += 1) {
+      for (let b = a + 1; b < nodes.length; b += 1) {
+        if (
+          nodes[a].distanceTo(nodes[b]) <=
+          connectionDistance
+        ) {
+          lineVertices.push(
+            nodes[a].x,
+            nodes[a].y,
+            nodes[a].z,
+            nodes[b].x,
+            nodes[b].y,
+            nodes[b].z
+          );
+        }
+      }
+    }
+
+    const lineGeometry = new THREE.BufferGeometry();
+
+    lineGeometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(
+        lineVertices,
+        3
+      )
+    );
+
+    const lineMaterial =
+      new THREE.LineBasicMaterial({
+        color: 0x26333f,
+        transparent: true,
+        opacity: 0.72,
+        depthWrite: false,
+      });
+
+    const connectionLines = new THREE.LineSegments(
+      lineGeometry,
+      lineMaterial
+    );
+
+    group.add(connectionLines);
+
+    const resize = () => {
+      const rect = container.getBoundingClientRect();
+      const width = Math.max(rect.width, 1);
+      const height = Math.max(rect.height, 1);
+
+      renderer.setSize(width, height, false);
+
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+
+      renderer.render(scene, camera);
+    };
+
+    let pointerX = 0;
+    let pointerY = 0;
+
+    const handlePointerMove = (
+      event: PointerEvent
+    ) => {
+      const rect = container.getBoundingClientRect();
+
+      if (
+        rect.width <= 0 ||
+        rect.height <= 0
+      ) {
+        return;
+      }
+
+      pointerX =
+        ((event.clientX - rect.left) /
+          rect.width -
+          0.5) *
+        0.5;
+
+      pointerY =
+        ((event.clientY - rect.top) /
+          rect.height -
+          0.5) *
+        0.35;
+    };
+
+    resize();
+
+    let animationFrame = 0;
+    let autoRotation = 0;
+
+    const animate = () => {
+      autoRotation += 0.00125;
+
+      group.rotation.y =
+        autoRotation + pointerX * 0.35;
+
+      group.rotation.x +=
+        (pointerY * 0.22 -
+          group.rotation.x) *
+        0.025;
+
+      renderer.render(scene, camera);
+
+      animationFrame =
+        window.requestAnimationFrame(animate);
+    };
+
+    if (reducedMotion) {
+      group.rotation.x = -0.06;
+      group.rotation.y = 0.22;
+      renderer.render(scene, camera);
+    } else {
+      window.addEventListener(
+        "pointermove",
+        handlePointerMove,
+        { passive: true }
+      );
+
+      animationFrame =
+        window.requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+
+    cleanupTopologyRef.current = () => {
+      if (animationFrame) {
+        window.cancelAnimationFrame(
+          animationFrame
+        );
+      }
+
+      window.removeEventListener(
+        "pointermove",
+        handlePointerMove
+      );
+
+      window.removeEventListener(
+        "resize",
+        resize
+      );
+
+      nodeGeometry.dispose();
+      nodeMaterial.dispose();
+      lineGeometry.dispose();
+      lineMaterial.dispose();
+      renderer.dispose();
+
+      if (
+        renderer.domElement.parentElement ===
+        container
+      ) {
+        container.removeChild(
+          renderer.domElement
+        );
+      }
+    };
+  }, [isMobile, reducedMotion]);
+
+  useEffect(() => {
+    if (window.THREE) {
+      initTopology();
+    }
+
+    return () => {
+      cleanupTopologyRef.current();
+    };
+  }, [initTopology]);
 
   return (
-    <section 
-      className="relative overflow-hidden"
-      style={{ 
-        perspective: "1000px",
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-      }}
+    <section
+      id="hero"
+      className="scroll-mt-24 relative overflow-hidden  lg:min-h-[calc(100svh-4rem)]"
       aria-label="Hero section"
     >
-      {/* Background - Technical grid with slow parallax */}
-      {!isReducedMotion && (
-        <>
-          <ParallaxLayer speed={0.15} zIndex={-3} className="opacity-30">
-            <TechnicalGrid />
-          </ParallaxLayer>
-          
-          <ParallaxLayer speed={0.25} zIndex={-2} className="opacity-40">
-            <TopologyLines />
-          </ParallaxLayer>
-          
-          <ParallaxLayer speed={0.35} zIndex={-1} className="opacity-50">
-            <InfrastructureNodes />
-          </ParallaxLayer>
-        </>
-      )}
+      <Script
+        src={THREE_CDN}
+        strategy="afterInteractive"
+        onLoad={initTopology}
+      />
 
-      {/* Foreground content */}
-      <div 
-        className="relative mx-auto max-w-[1280px] px-6 lg:px-8 pt-24 pb-20"
+      <div
+        ref={topologyRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 opacity-50"
         style={{
-          transform: isReducedMotion ? undefined : `translateZ(${progress * 50}px)`,
-          transition: "transform 0.1s linear",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 68%, transparent 100%)",
         }}
-      >
-        {/* Kicker */}
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-5">
-          {kicker}
-        </p>
+      />
 
-        {/* Headline with depth layers */}
-        <div style={{ transformStyle: "preserve-3d" }}>
-          {headlineLines.map((line, index) => (
-            <ParallaxLayer
-              key={index}
-              speed={0.1 + index * 0.05}
-              zIndex={index + 1}
-              className="relative"
-            >
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.08] max-w-3xl">
-                {line}
-              </h1>
-            </ParallaxLayer>
-          ))}
-        </div>
+      <div className="relative z-10 mx-auto w-full max-w-[1520px] px-5 py-12 sm:px-8 sm:py-14 md:py-16 lg:min-h-[calc(100svh-4rem)] lg:px-10 lg:py-16 lg:flex lg:items-center">
+        <div className="grid w-full grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.75fr)] lg:gap-14">
+          <div className="min-w-0 lg:pt-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+              {kicker}
+            </p>
 
-        {/* Subheadline */}
-        <ParallaxLayer speed={0.15} zIndex={10}>
-          <p className="mt-6 text-lg text-muted leading-relaxed max-w-2xl">
-            {subheadline}
-          </p>
-        </ParallaxLayer>
+            <p className="mt-4 font-mono text-xs text-faint sm:text-sm">
+              {name}
+              <span className="mx-2 text-line">
+                ·
+              </span>
+              {professionalTitle}
+            </p>
 
-        {/* CTAs */}
-        <ParallaxLayer speed={0.2} zIndex={11}>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={primaryCta.href}
-              className="px-6 py-3 rounded-lg bg-accent text-background font-semibold text-sm hover:bg-sky-400 transition-colors shadow-lg shadow-sky-500/20"
-            >
-              {primaryCta.label}
-            </Link>
-            <Link
-              href={secondaryCta.href}
-              className="px-6 py-3 rounded-lg bg-surface border border-line text-foreground font-semibold text-sm hover:border-accent/60 hover:text-accent transition-colors"
-            >
-              {secondaryCta.label}
-            </Link>
-            {tertiaryCta && (
+            <h1 className="mt-8 max-w-5xl font-heading text-[2.7rem] font-semibold leading-[0.98] tracking-[-0.045em] sm:text-5xl lg:text-[4rem] xl:text-[4.6rem]">
+              {headlineLines.map(
+                (line, index) => {
+                  const isLast =
+                    index ===
+                    headlineLines.length - 1;
+
+                  return (
+                    <span
+                      key={line}
+                      className={`block ${
+                        isLast
+                          ? "text-accent"
+                          : "text-foreground"
+                      }`}
+                    >
+                      {line}
+                    </span>
+                  );
+                }
+              )}
+            </h1>
+
+            <p className="mt-7 max-w-2xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
+              {subheadline}
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href={tertiaryCta.href}
-                className="px-6 py-3 rounded-lg text-muted font-medium text-sm hover:text-foreground transition-colors"
+                href={primaryCta.href}
+                className="rounded-[4px] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-background transition-colors hover:bg-[#d89432]"
               >
-                {tertiaryCta.label} →
+                {primaryCta.label}
               </Link>
-            )}
-            {quaternaryCta && (
+
               <Link
-                href={quaternaryCta.href}
-                className="px-6 py-3 rounded-lg text-muted font-medium text-sm hover:text-foreground transition-colors"
+                href={secondaryCta.href}
+                className="rounded-[4px] border border-line bg-transparent px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent"
               >
-                {quaternaryCta.label} →
+                {secondaryCta.label}
               </Link>
-            )}
+            </div>
           </div>
-        </ParallaxLayer>
 
-        {/* Name and title */}
-        <ParallaxLayer speed={0.25} zIndex={12}>
-          <p className="mt-10 font-mono text-xs text-faint">
-            {name} · {professionalTitle}
-          </p>
-        </ParallaxLayer>
-      </div>
+          <aside className="space-y-4">
+            <div className="rounded-[6px] border border-line bg-surface p-6 sm:p-7">
+              <div className="flex items-start justify-between gap-6">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
+                    Currently building
+                  </p>
 
-      {/* Scroll indicator */}
-      {!isReducedMotion && !isMobile && (
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce font-mono text-xs text-faint">
-          Scroll
-          <svg className="inline h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M19 12l-7 7-7-7" />
-          </svg>
+                  <h2 className="mt-5 text-[21px] font-semibold tracking-tight text-foreground">
+                    {building.project}
+                  </h2>
+                </div>
+
+                <span className="mt-0.5 inline-flex shrink-0 items-center gap-2 font-mono text-[10px] tracking-[0.08em] text-success">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-40" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
+                  </span>
+                  Live
+                </span>
+              </div>
+
+              <p className="mt-1 font-mono text-xs text-accent">
+                {building.status}
+              </p>
+
+              <dl className="mt-6 space-y-3">
+                <div className="grid grid-cols-[120px_1fr] items-baseline gap-4">
+                  <dt className="text-sm text-faint">
+                    Current phase
+                  </dt>
+
+                  <dd className="text-right text-sm text-muted">
+                    {building.phase}
+                  </dd>
+                </div>
+
+                <div className="grid grid-cols-[120px_1fr] items-baseline gap-4">
+                  <dt className="text-sm text-faint">
+                    Last public update
+                  </dt>
+
+                  <dd className="text-right text-sm text-muted">
+                    {formatPublicDate(
+                      building.lastPublicUpdate
+                    )}
+                  </dd>
+                </div>
+              </dl>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {building.technologies.map(
+                  (technology) => (
+                    <span
+                      key={technology}
+                      className="rounded-full border border-line bg-transparent px-3 py-1 font-mono text-[10px] text-muted"
+                    >
+                      {technology}
+                    </span>
+                  )
+                )}
+              </div>
+
+              <p className="mt-6 text-sm leading-6 text-muted">
+                {building.description}
+              </p>
+
+              <p className="mt-6 border-t border-line-soft/70 pt-5 font-mono text-[10px] leading-5 text-faint">
+                A controlled public view of current
+                work — never private implementation
+                details.
+              </p>
+            </div>
+
+            <div className="media-placeholder rounded-[4px] border border-dashed border-line bg-background/70 p-5">
+              <div className="flex min-h-24 items-center justify-center gap-3 text-faint">
+                <svg
+                  aria-hidden="true"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect
+                    x="3"
+                    y="4"
+                    width="18"
+                    height="16"
+                    rx="2"
+                  />
+                  <circle
+                    cx="8.5"
+                    cy="9"
+                    r="1.5"
+                  />
+                  <path d="m4 17 5-5 4 4 2-2 5 4" />
+                </svg>
+
+                <div>
+                  <p className="text-sm text-muted">
+                    Photo or demo clip goes here.
+                  </p>
+
+                  <p className="mt-1 text-sm text-faint">
+                    Real headshot or screen recording placeholder
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
-      )}
+      </div>
     </section>
-  );
-}
-
-/** Technical grid background */
-function TechnicalGrid() {
-  return (
-    <svg 
-      className="absolute inset-0 h-full w-full" 
-      viewBox="0 0 100 100" 
-      preserveAspectRatio="none"
-      style={{ pointerEvents: "none" }}
-    >
-      <defs>
-        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)" />
-    </svg>
-  );
-}
-
-/** Topology lines - subtle connecting lines */
-function TopologyLines() {
-  const lines = [
-    { x1: 10, y1: 20, x2: 90, y2: 80 },
-    { x1: 90, y1: 20, x2: 10, y2: 80 },
-    { x1: 50, y1: 5, x2: 50, y2: 95 },
-    { x1: 5, y1: 50, x2: 95, y2: 50 },
-    { x1: 20, y1: 10, x2: 80, y2: 90 },
-    { x1: 80, y1: 10, x2: 20, y2: 90 },
-  ];
-
-  return (
-    <svg 
-      className="absolute inset-0 h-full w-full" 
-      viewBox="0 0 100 100" 
-      preserveAspectRatio="none"
-      style={{ pointerEvents: "none" }}
-    >
-      {lines.map((line, i) => (
-        <line
-          key={i}
-          x1={`${line.x1}%`}
-          y1={`${line.y1}%`}
-          x2={`${line.x2}%`}
-          y2={`${line.y2}%`}
-          stroke="currentColor"
-          strokeWidth="0.3"
-          opacity="0.15"
-          strokeDasharray="5,10"
-        />
-      ))}
-    </svg>
-  );
-}
-
-/** Infrastructure nodes - floating dots */
-function InfrastructureNodes() {
-  const nodes = [
-    { x: 15, y: 15, size: 3 },
-    { x: 85, y: 15, size: 2 },
-    { x: 15, y: 85, size: 2 },
-    { x: 85, y: 85, size: 3 },
-    { x: 50, y: 50, size: 4 },
-    { x: 30, y: 70, size: 2 },
-    { x: 70, y: 30, size: 2 },
-    { x: 40, y: 20, size: 1.5 },
-    { x: 60, y: 80, size: 1.5 },
-  ];
-
-  return (
-    <svg 
-      className="absolute inset-0 h-full w-full" 
-      viewBox="0 0 100 100" 
-      preserveAspectRatio="none"
-      style={{ pointerEvents: "none" }}
-    >
-      {nodes.map((node, i) => (
-        <circle
-          key={i}
-          cx={`${node.x}%`}
-          cy={`${node.y}%`}
-          r={node.size}
-          fill="currentColor"
-          opacity="0.2"
-          style={{ filter: "blur(1px)" }}
-        />
-      ))}
-    </svg>
   );
 }

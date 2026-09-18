@@ -1,7 +1,9 @@
 "use client";
 
 import { useScrollDepth, useElementScroll, useReducedMotion } from "@/lib/scroll";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
+
+const SCROLL_THRESHOLDS: number[] = [0, 0.1, 0.25, 0.5, 0.75, 0.9, 1];
 
 export interface CurrentlyBuildingStackProps {
   project?: string;
@@ -20,11 +22,11 @@ export function CurrentlyBuildingStack({
   technologies = ["Obsidian", "Markdown", "Agentic Workflows", "Verification Systems"],
   description = "Building a local-first AI engineering command center with project scanning, planning, task management, verification and knowledge management. The portfolio you are reading is the controlled public window into that workspace.",
 }: CurrentlyBuildingStackProps) {
-  const { progress, isReducedMotion } = useScrollDepth();
+  const { isReducedMotion } = useScrollDepth();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { progress: containerProgress, isInView } = useElementScroll(containerRef, {
+  const { progress: containerProgress } = useElementScroll(containerRef, {
     rootMargin: "100px 0px",
-    threshold: [0, 0.1, 0.25, 0.5, 0.75, 0.9, 1],
+    threshold: SCROLL_THRESHOLDS,
   });
   const [isHovered, setIsHovered] = useState(false);
   const reducedMotion = useReducedMotion();

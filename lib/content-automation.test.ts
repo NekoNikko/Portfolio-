@@ -14,17 +14,17 @@ describe("Content Automation Pipeline", () => {
   let testQueueDir: string;
 
   async function getQueueModule() {
-    const mod = await import("./content-queue.ts");
+    const mod = await import("./content-queue");
     return mod;
   }
 
   async function getSanitizerModule() {
-    const mod = await import("./content-sanitizer.ts");
+    const mod = await import("./content-sanitizer");
     return mod;
   }
 
   async function getGeneratorsModule() {
-    const mod = await import("./content-generators.ts");
+    const mod = await import("./content-generators");
     return mod;
   }
 

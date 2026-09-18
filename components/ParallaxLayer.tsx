@@ -1,9 +1,14 @@
 "use client";
 
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { useElementScroll, useReducedMotion } from "@/lib/scroll";
 
-export interface ParallaxLayerProps extends React.HTMLAttributes<HTMLDivElement> {
+const PARALLAX_THRESHOLDS: number[] = [0, 0.1, 0.25, 0.5, 0.75, 0.9, 1];
+const DEFAULT_SCALE_RANGE: [number, number] = [1, 1.1];
+const DEFAULT_OPACITY_RANGE: [number, number] = [0.3, 1];
+
+export interface ParallaxLayerProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /** Speed factor: 0 = fixed, 0.5 = half scroll speed, 1 = normal, >1 = faster */
   speed?: number;
   /** Z-index layer for depth ordering */
@@ -16,6 +21,8 @@ export interface ParallaxLayerProps extends React.HTMLAttributes<HTMLDivElement>
   fade?: boolean;
   /** Opacity range [min, max] */
   opacityRange?: [number, number];
+  /** Absolute for decorative layers, flow for interactive/content layers */
+  layout?: "absolute" | "flow";
   /** Additional className */
   className?: string;
   /** Children content */
@@ -28,70 +35,71 @@ export const ParallaxLayer = forwardRef<HTMLDivElement, ParallaxLayerProps>(
       speed = 0.5,
       zIndex = 0,
       scale = false,
-      scaleRange = [1, 1.1],
+      scaleRange = DEFAULT_SCALE_RANGE,
       fade = false,
-      opacityRange = [0.3, 1],
+      opacityRange = DEFAULT_OPACITY_RANGE,
+      layout = "absolute",
       className = "",
       children,
     },
     ref
   ) => {
     const layerRef = useRef<HTMLDivElement>(null);
+
     const combinedRef = (node: HTMLDivElement | null) => {
       layerRef.current = node;
+
       if (ref) {
-        if (typeof ref === "function") ref(node);
-        else ref.current = node;
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
       }
     };
 
     const reducedMotion = useReducedMotion();
-    const { progress, isInView } = useElementScroll(layerRef, {
+
+    const { progress } = useElementScroll(layerRef, {
       rootMargin: "100% 0px",
-      threshold: [0, 0.1, 0.25, 0.5, 0.75, 0.9, 1],
+      threshold: PARALLAX_THRESHOLDS,
     });
+    const viewportHeight =
+      typeof window === "undefined"
+        ? 0
+        : window.innerHeight;
 
-    const [style, setStyle] = useState<React.CSSProperties>({});
+    const translateY =
+      -progress * viewportHeight * speed;
 
-    useEffect(() => {
-      if (reducedMotion) {
-        setStyle({});
-        return;
-      }
+    const scaleValue = scale
+      ? scaleRange[0] +
+        (scaleRange[1] - scaleRange[0]) * progress
+      : 1;
 
-      // Progress goes from 0 (element bottom at viewport top) to 1 (element top at viewport top)
-      // For parallax, we want the element to move opposite to scroll direction
-      // At progress 0 (just entering), translateY = 0
-      // At progress 1 (leaving), translateY = -viewportHeight * speed
-      const translateY = -progress * window.innerHeight * speed;
+    const opacityValue = fade
+      ? opacityRange[1] -
+        (opacityRange[1] - opacityRange[0]) * progress
+      : 1;
 
-      let scaleValue = 1;
-      if (scale) {
-        scaleValue = scaleRange[0] + (scaleRange[1] - scaleRange[0]) * progress;
-      }
-
-      let opacityValue = 1;
-      if (fade) {
-        opacityValue = opacityRange[1] - (opacityRange[1] - opacityRange[0]) * progress;
-      }
-
-      setStyle({
-        transform: `translate3d(0, ${translateY}px, 0) scale(${scaleValue})`,
-        opacity: opacityValue,
-        willChange: "transform, opacity",
-      });
-    }, [progress, speed, scale, scaleRange, fade, opacityRange, reducedMotion]);
+    const style: React.CSSProperties = reducedMotion
+      ? {}
+      : {
+          transform: `translate3d(0, ${translateY}px, 0) scale(${scaleValue})`,
+          opacity: opacityValue,
+          willChange: "transform, opacity",
+        };
 
     return (
       <div
         ref={combinedRef}
         style={{
-          position: "absolute",
-          inset: 0,
+          position: layout === "flow" ? "relative" : "absolute",
+          ...(layout === "absolute" ? { inset: 0 } : {}),
           zIndex,
-          pointerEvents: "none",
+          pointerEvents: layout === "flow" ? "auto" : "none",
           ...style,
-        } as React.CSSProperties}
+        }}
         className={className}
       >
         {children}
@@ -116,21 +124,35 @@ export interface ScrollProgressProps {
 export function ScrollProgress({
   onProgress,
   rootMargin = "0px",
-  threshold = [0, 0.1, 0.25, 0.5, 0.75, 0.9, 1],
+  threshold = PARALLAX_THRESHOLDS,
   children,
   className = "",
 }: ScrollProgressProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
-  const { progress, isInView } = useElementScroll(ref, { rootMargin, threshold });
+
+  const { progress, isInView } = useElementScroll(ref, {
+    rootMargin,
+    threshold,
+  });
 
   useEffect(() => {
-    if (onProgress) onProgress(progress);
+    if (onProgress) {
+      onProgress(progress);
+    }
   }, [onProgress, progress]);
 
   if (reducedMotion) {
-    return <div ref={ref} className={className}>{children(1, true)}</div>;
+    return (
+      <div ref={ref} className={className}>
+        {children(1, true)}
+      </div>
+    );
   }
 
-  return <div ref={ref} className={className}>{children(progress, isInView)}</div>;
+  return (
+    <div ref={ref} className={className}>
+      {children(progress, isInView)}
+    </div>
+  );
 }

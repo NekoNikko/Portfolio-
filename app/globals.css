@@ -1,180 +1,386 @@
 @import "tailwindcss";
 
-/*
- * JARVIS design language
- * Dark mode · subtle blue/cyan accent · technical typography · subtle grid ·
- * restrained glow · minimal animation · clear hierarchy.
- * Deliberately NOT a video game: calm, professional, readable.
- */
-
 @theme {
-  --color-background: #070b14;
-  --color-background-soft: #0a101d;
-  --color-surface: #0e1626;
-  --color-surface-raised: #12203a;
-  --color-line: #1c2a45;
-  --color-line-soft: #16223a;
+  --color-background: #0E1620;
+  --color-background-soft: #111A24;
+  --color-surface: #141E29;
+  --color-surface-raised: #141E29;
 
-  --color-foreground: #e6edf7;
-  --color-muted: #8fa3c0;
-  --color-faint: #5a6d8c;
+  --color-line: #26333F;
+  --color-line-soft: #1B2733;
 
-  --color-accent: #38bdf8;
-  --color-accent-dim: #0ea5e9;
-  --color-cyan-glow: rgba(56, 189, 248, 0.12);
-  --color-cyan-glow-strong: rgba(56, 189, 248, 0.2);
+  --color-foreground: #E9EEF2;
+  --color-muted: #93A3B0;
+  --color-faint: #5D6B78;
 
-  --color-success: #34d399;
-  --color-warning: #fbbf24;
-  --color-danger: #f87171;
+  --color-accent: #E8A33D;
+  --color-accent-dim: #7A5A2A;
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  --color-success: #6FCF97;
+  --color-warning: #E8A33D;
+  --color-danger: #ef8d8d;
+
+  --font-sans:
+    var(--font-body-family),
+    "IBM Plex Sans",
+    Arial,
+    sans-serif;
+
+  --font-heading:
+    var(--font-heading-family),
+    "Space Grotesk",
+    Arial,
+    sans-serif;
+
+  --font-mono:
+    var(--font-mono-family),
+    "IBM Plex Mono",
+    "SFMono-Regular",
+    Consolas,
+    monospace;
 }
 
-/* Subtle technical grid backdrop */
-.grid-backdrop {
-  background-image:
-    linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 35%, transparent 78%);
-  pointer-events: none;
+html {
+  background: var(--color-background);
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-background);
+  margin: 0;
+  background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.28);
+  background: rgba(232, 163, 61, 0.22);
+  color: var(--color-foreground);
 }
 
-/* Accessible focus states */
 :focus-visible {
   outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline-offset: 3px;
 }
 
-/* Restrained glow for hero accents */
+/*
+ * The previous cyan page-wide grid is intentionally disabled.
+ * The hero will own the topology visualization.
+ */
+.grid-backdrop {
+  display: none;
+}
+
+/* Legacy class kept harmless while existing components are migrated. */
 .glow-accent {
-  box-shadow: 0 0 32px var(--color-cyan-glow);
+  box-shadow: none;
 }
 
-/* Markdown content typography */
+/* ---------------------------------------------------------
+   Responsive page progress
+   --------------------------------------------------------- */
+
+.scroll-progress-mobile {
+  position: fixed;
+  z-index: 70;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-line-soft);
+  pointer-events: none;
+}
+
+.scroll-progress-mobile__fill {
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left center;
+}
+
+.scroll-rail-desktop {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .scroll-progress-mobile {
+    display: none;
+  }
+
+  .scroll-rail-desktop {
+    display: block;
+    position: fixed;
+    z-index: 40;
+    left: 18px;
+    top: 92px;
+    bottom: 38px;
+    width: 150px;
+    pointer-events: auto;
+  }
+
+  .scroll-rail-track {
+    pointer-events: none;
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-line);
+  }
+
+  .scroll-rail-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    transform-origin: top center;
+  }
+
+  .scroll-rail-list {
+    position: absolute;
+    inset: 0 auto 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    pointer-events: auto;
+  }
+
+  .scroll-rail-link {
+    pointer-events: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-faint);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .scroll-rail-node {
+    width: 13px;
+    height: 13px;
+    display: grid;
+    place-items: center;
+  }
+
+  .scroll-rail-node::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border: 1px solid var(--color-faint);
+    background: var(--color-background);
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .scroll-rail-label {
+    opacity: 0;
+    transform: translateX(-4px);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease,
+      color 180ms ease;
+  }
+
+  .scroll-rail-link:hover .scroll-rail-label,
+  .scroll-rail-link[data-active="true"] .scroll-rail-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-rail-link[data-active="true"] {
+    color: var(--color-accent);
+  }
+
+  .scroll-rail-link[data-active="true"] .scroll-rail-node::after {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+  }
+}
+
+/* ---------------------------------------------------------
+   Markdown
+   --------------------------------------------------------- */
+
 .markdown-body {
   line-height: 1.75;
   color: var(--color-foreground);
 }
+
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   letter-spacing: -0.02em;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   scroll-margin-top: 6rem;
 }
+
 .markdown-body h1 {
   font-size: 1.75rem;
-  font-weight: 700;
 }
+
 .markdown-body h2 {
   font-size: 1.375rem;
-  font-weight: 650;
   padding-bottom: 0.375rem;
   border-bottom: 1px solid var(--color-line);
 }
+
 .markdown-body h3 {
   font-size: 1.125rem;
-  font-weight: 600;
 }
+
 .markdown-body p {
   margin: 0.9rem 0;
-  color: var(--color-foreground);
 }
+
 .markdown-body ul,
 .markdown-body ol {
   margin: 0.9rem 0;
   padding-left: 1.5rem;
 }
+
 .markdown-body ul {
   list-style: disc;
 }
+
 .markdown-body ol {
   list-style: decimal;
 }
+
 .markdown-body li {
   margin: 0.35rem 0;
 }
+
 .markdown-body code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background: var(--color-surface-raised);
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: 4px;
   padding: 0.1em 0.35em;
 }
+
 .markdown-body pre {
   background: var(--color-background-soft);
   border: 1px solid var(--color-line);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 1rem;
   overflow-x: auto;
   margin: 1.25rem 0;
 }
+
 .markdown-body pre code {
+  border: 0;
   background: transparent;
-  border: none;
   padding: 0;
-  font-size: 0.8125rem;
 }
+
 .markdown-body a {
   color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.markdown-body a:hover {
-  color: #7dd3fc;
-}
+
 .markdown-body blockquote {
-  border-left: 3px solid var(--color-accent-dim);
+  border-left: 2px solid var(--color-accent);
   padding-left: 1rem;
   color: var(--color-muted);
   margin: 1.25rem 0;
 }
-.markdown-body hr {
-  border-color: var(--color-line);
-  margin: 2rem 0;
-}
+
 .markdown-body table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.25rem 0;
   font-size: 0.875rem;
 }
+
 .markdown-body th,
 .markdown-body td {
   border: 1px solid var(--color-line);
   padding: 0.5rem 0.75rem;
   text-align: left;
 }
+
 .markdown-body th {
-  background: var(--color-surface-raised);
+  background: var(--color-surface);
 }
 
-/* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  }
+}
+/* Phase 15A document-mapped scroll rail */
+@media (min-width: 1000px) {
+  .scroll-rail-desktop {
+    pointer-events: auto;
+    width: 180px;
+  }
+
+  .scroll-rail-track {
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .scroll-rail-list {
+    position: absolute;
+    inset: 0;
+    display: block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .scroll-rail-item {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .scroll-rail-link {
+    display: inline-flex;
+    width: auto;
+    min-height: 28px;
+    align-items: center;
+    padding: 6px 10px 6px 0;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .scroll-rail-node {
+    flex: 0 0 auto;
   }
 }

@@ -1,9 +1,8 @@
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import StatusBadge from "@/components/StatusBadge";
-import { DepthCard, SimpleDepthCard } from "@/components/DepthCard";
+import { SimpleDepthCard } from "@/components/DepthCard";
 import { Hero3D } from "@/components/Hero3D";
-import { CurrentlyBuildingStack } from "@/components/CurrentlyBuildingStack";
 import { HowIWorkScroll } from "@/components/HowIWorkScroll";
 import {
   getProjects,
@@ -53,6 +52,22 @@ export default function HomePage() {
   const projects = getProjects().map(toPublicProject);
   const caseStudies = getCaseStudies();
   const updates = getUpdates();
+  const journalEntries = getJournal();
+
+  const activityUpdates = updates.slice(0, 5).map((update) => {
+    const journalEntry = journalEntries.find(
+      (entry) =>
+        entry.date === update.date &&
+        entry.project === update.project &&
+        (entry.category ?? "").toLowerCase() ===
+          update.category.toLowerCase()
+    );
+
+    return {
+      ...update,
+      journalSlug: journalEntry?.slug ?? null,
+    };
+  });
   const skills = getSkills();
 
   const hero = site.hero ?? {};
@@ -69,94 +84,17 @@ export default function HomePage() {
         subheadline={hero.subheadline}
         primaryCta={hero.primaryCta}
         secondaryCta={hero.secondaryCta}
-        tertiaryCta={hero.tertiaryCta}
-        quaternaryCta={hero.quaternaryCta}
         name={site.name}
         professionalTitle={site.professionalTitle}
+        currentlyBuilding={building}
       />
 
-      {/* ------------------------------------------------------------------ */}
-      {/* CURRENTLY BUILDING                                                  */}
-      {/* ------------------------------------------------------------------ */}
-      {building.project && (
-        <section className="border-y border-line bg-background-soft/50">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-14">
-            <SectionHeading
-              kicker="Live status"
-              title="Currently Building"
-              description="A controlled public view of what I am working on right now — never private implementation details."
-            />
-            <div className="p-6 rounded-xl border border-accent/25 bg-surface glow-accent">
-              <div className="flex flex-wrap items-center gap-3">
-                <h3 className="text-xl font-bold text-foreground">
-                  {building.project}
-                </h3>
-                <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-400 text-xs font-medium">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  {building.status}
-                </span>
-              </div>
-              <dl className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-                <div>
-                  <dt className="text-faint font-mono text-xs uppercase tracking-wider">
-                    Current phase
-                  </dt>
-                  <dd className="mt-1 text-foreground">{building.phase}</dd>
-                </div>
-                <div>
-                  <dt className="text-faint font-mono text-xs uppercase tracking-wider">
-                    Last public update
-                  </dt>
-                  <dd className="mt-1 text-foreground">
-                    {building.lastPublicUpdate
-                      ? formatDate(building.lastPublicUpdate)
-                      : "Not yet available"}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-faint font-mono text-xs uppercase tracking-wider">
-                    Technology
-                  </dt>
-                  <dd className="mt-1 flex flex-wrap gap-1.5">
-                    {(building.technologies ?? []).map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 rounded border border-line bg-background-soft font-mono text-xs text-accent"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </dd>
-                </div>
-              </dl>
-              <p className="mt-5 text-muted leading-relaxed max-w-3xl">
-                {building.description}
-              </p>
-            </div>
-          </div>
-</section>
-      )}
- 
-      {/* ------------------------------------------------------------------ */}
-      {/* CURRENTLY BUILDING — 3D Stack Visualization                        */}
-      {/* ------------------------------------------------------------------ */}
-      {building.project && (
-        <CurrentlyBuildingStack
-          project={building.project}
-          status={building.status}
-          phase={building.phase}
-          lastPublicUpdate={building.lastPublicUpdate}
-          technologies={building.technologies}
-          description={building.description}
-        />
-      )}
- 
       {/* ------------------------------------------------------------------ */}
       {/* FEATURED PROJECTS — Depth Cards                                    */}
       {/* ------------------------------------------------------------------ */}
       {projects.length > 0 && (
-        <section>
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+        <section id="work" className="scroll-mt-24">
+          <div className="mx-auto max-w-[1520px] px-4 sm:px-6 py-16">
             <SectionHeading
               kicker="Selected work"
               title="Featured Projects"
@@ -203,45 +141,39 @@ export default function HomePage() {
       )}
  
       {/* ------------------------------------------------------------------ */}
-      {/* HOW I WORK — Scroll Progression                                    */}
+      {/* FEATURED CASE STUDY                                                 */}
       {/* ------------------------------------------------------------------ */}
-      {(site.methodology?.length ?? 0) > 0 && (
-        <HowIWorkScroll methodology={site.methodology} />
-      )}
-
-      {/* ------------------------------------------------------------------ */}
-      {/* HOW I USE AI                                                        */}
-      {/* ------------------------------------------------------------------ */}
-      {(site.aiUsage?.usedFor?.length ?? 0) > 0 && (
-        <section>
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+      {caseStudies.length > 0 && (
+        <section className="border-y border-line bg-background-soft/50">
+          <div className="mx-auto max-w-[1520px] px-4 sm:px-6 py-16">
             <SectionHeading
-              kicker={site.aiUsage?.kicker ?? "AI-assisted development"}
-              title={site.aiUsage?.headline ?? "How I Use AI"}
+              kicker="Featured case study"
+              title="Engineering in Depth"
+              description="A full walkthrough of a real problem: context, approach, implementation, testing, and lessons learned."
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {site.aiUsage!.usedFor!.map((u) => (
-                  <li
-                    key={u}
-                    className="flex items-start gap-2.5 p-3 rounded-lg border border-line bg-surface text-sm text-foreground"
-                  >
-                    <span aria-hidden="true" className="text-accent font-mono">
-                      ▸
-                    </span>
-                    {u}
-                  </li>
-                ))}
-              </ul>
-              <div className="p-6 rounded-xl border border-accent/25 bg-surface glow-accent self-start">
-                <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent mb-3">
-                  Non-negotiable
+            {caseStudies.slice(0, 1).map((c) => (
+              <Link
+                key={c.slug}
+                href={`/case-studies/${c.slug}`}
+                className="block p-6 md:p-8 rounded-xl border border-line bg-surface hover:border-accent/50 transition-colors"
+              >
+                <div className="flex flex-wrap items-center gap-2 mb-4 font-mono text-[11px]">
+                  <span className="px-2 py-0.5 rounded border border-accent/30 text-accent">
+                    {c.category}
+                  </span>
+                  {c.date && (
+                    <span className="text-faint">{formatDate(c.date)}</span>
+                  )}
+                </div>
+                <h3 className="text-xl font-bold text-foreground">{c.title}</h3>
+                <p className="mt-2 text-sm text-muted leading-relaxed max-w-3xl">
+                  {c.summary}
                 </p>
-                <p className="text-lg leading-relaxed text-foreground">
-                  {site.aiUsage?.principle}
+                <p className="mt-4 font-mono text-sm text-accent">
+                  Read the case study →
                 </p>
-              </div>
-            </div>
+              </Link>
+            ))}
           </div>
         </section>
       )}
@@ -250,15 +182,15 @@ export default function HomePage() {
       {/* RECENT ENGINEERING ACTIVITY                                         */}
       {/* ------------------------------------------------------------------ */}
       {updates.length > 0 && (
-        <section className="border-y border-line bg-background-soft/50">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+        <section id="journal" className="scroll-mt-24 border-y border-line bg-background-soft/50">
+          <div className="mx-auto max-w-[1520px] px-4 sm:px-6 py-16">
             <SectionHeading
               kicker="Activity feed"
               title="Recent Engineering Activity"
               description="Selected milestones from a continuously updated engineering log."
             />
             <ol className="relative border-l border-line ml-3 space-y-8">
-              {updates.slice(0, 5).map((u) => (
+              {activityUpdates.map((u) => (
                 <li key={u.id} className="pl-6 relative">
                   <span
                     aria-hidden="true"
@@ -267,9 +199,19 @@ export default function HomePage() {
                   <p className="font-mono text-xs text-faint uppercase tracking-wider">
                     {formatDate(u.date)}
                   </p>
-                  <p className="mt-1.5 text-sm font-semibold text-foreground">
-                    {u.summary}
-                  </p>
+                  {u.journalSlug ? (
+                    <Link
+                      href={`/journal/${u.journalSlug}`}
+                      className="mt-1.5 inline-block rounded-[2px] text-sm font-semibold text-foreground transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                      aria-label={`Read journal entry: ${u.summary}`}
+                    >
+                      {u.summary}
+                    </Link>
+                  ) : (
+                    <p className="mt-1.5 text-sm font-semibold text-foreground">
+                      {u.summary}
+                    </p>
+                  )}
                   {u.detail && (
                     <p className="mt-1 text-sm text-muted leading-relaxed">
                       {u.detail}
@@ -297,11 +239,18 @@ export default function HomePage() {
       )}
 
       {/* ------------------------------------------------------------------ */}
+      {/* HOW I WORK — Scroll Progression                                    */}
+      {/* ------------------------------------------------------------------ */}
+      {(site.methodology?.length ?? 0) > 0 && (
+        <HowIWorkScroll methodology={site.methodology} />
+      )}
+
+      {/* ------------------------------------------------------------------ */}
       {/* TECHNICAL SKILLS (preview)                                          */}
       {/* ------------------------------------------------------------------ */}
       {skills.length > 0 && (
-        <section>
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+        <section id="skills" className="scroll-mt-24">
+          <div className="mx-auto max-w-[1520px] px-4 sm:px-6 py-16">
             <SectionHeading
               kicker="Capabilities"
               title="Technical Skills"
@@ -341,39 +290,38 @@ export default function HomePage() {
       )}
 
       {/* ------------------------------------------------------------------ */}
-      {/* FEATURED CASE STUDY                                                 */}
+      {/* HOW I USE AI                                                        */}
       {/* ------------------------------------------------------------------ */}
-      {caseStudies.length > 0 && (
-        <section className="border-y border-line bg-background-soft/50">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+      {(site.aiUsage?.usedFor?.length ?? 0) > 0 && (
+        <section id="ai-use" className="scroll-mt-24">
+          <div className="mx-auto max-w-[1520px] px-4 sm:px-6 py-16">
             <SectionHeading
-              kicker="Featured case study"
-              title="Engineering in Depth"
-              description="A full walkthrough of a real problem: context, approach, implementation, testing, and lessons learned."
+              kicker={site.aiUsage?.kicker ?? "AI-assisted development"}
+              title={site.aiUsage?.headline ?? "How I Use AI"}
             />
-            {caseStudies.slice(0, 1).map((c) => (
-              <Link
-                key={c.slug}
-                href={`/case-studies/${c.slug}`}
-                className="block p-6 md:p-8 rounded-xl border border-line bg-surface hover:border-accent/50 transition-colors"
-              >
-                <div className="flex flex-wrap items-center gap-2 mb-4 font-mono text-[11px]">
-                  <span className="px-2 py-0.5 rounded border border-accent/30 text-accent">
-                    {c.category}
-                  </span>
-                  {c.date && (
-                    <span className="text-faint">{formatDate(c.date)}</span>
-                  )}
-                </div>
-                <h3 className="text-xl font-bold text-foreground">{c.title}</h3>
-                <p className="mt-2 text-sm text-muted leading-relaxed max-w-3xl">
-                  {c.summary}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {site.aiUsage!.usedFor!.map((u) => (
+                  <li
+                    key={u}
+                    className="flex items-start gap-2.5 p-3 rounded-lg border border-line bg-surface text-sm text-foreground"
+                  >
+                    <span aria-hidden="true" className="text-accent font-mono">
+                      ▸
+                    </span>
+                    {u}
+                  </li>
+                ))}
+              </ul>
+              <div className="p-6 rounded-xl border border-accent/25 bg-surface glow-accent self-start">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent mb-3">
+                  Non-negotiable
                 </p>
-                <p className="mt-4 font-mono text-sm text-accent">
-                  Read the case study →
+                <p className="text-lg leading-relaxed text-foreground">
+                  {site.aiUsage?.principle}
                 </p>
-              </Link>
-            ))}
+              </div>
+            </div>
           </div>
         </section>
       )}
@@ -381,8 +329,8 @@ export default function HomePage() {
       {/* ------------------------------------------------------------------ */}
       {/* CONTACT                                                             */}
       {/* ------------------------------------------------------------------ */}
-      <section>
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16 text-center">
+      <section id="contact" className="scroll-mt-24">
+        <div className="mx-auto max-w-[1520px] px-4 sm:px-6 py-16 text-center">
           <SectionHeading
             kicker="Contact"
             title={site.contact?.headline ?? "Let's talk about your project."}
